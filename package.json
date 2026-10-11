@@ -1,0 +1,26 @@
+{
+  "name": "kinetic-typography-23s",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Kinetic typography 23 detik, 1920x1080, 30 fps, ekspor MP4 H.264",
+  "scripts": {
+    "setup:font": "node scripts/fetch-font.mjs",
+    "dev": "node server.mjs",
+    "test": "node scripts/test.mjs",
+    "render": "node scripts/render.mjs",
+    "render:draft": "node scripts/render.mjs --draft --out out/draft.mp4",
+    "verify": "node scripts/verify.mjs out/motion-typography.mp4",
+    "verify:draft": "node scripts/verify.mjs out/draft.mp4 --draft",
+    "build:preview": "node scripts/build-standalone.mjs"
+  },
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.65"
+  },
+  "optionalDependencies": {
+    "ffmpeg-static": "^5.2.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

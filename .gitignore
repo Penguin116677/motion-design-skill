@@ -1,2 +1,4 @@
 .DS_Store
 research materials/
+node_modules/
+out/stills/

@@ -2,165 +2,191 @@
 <html lang="id">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Portofolio Desainer Web — Edisi Renaisans</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Edisi Renaisans Portofolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Desainer web freelance: landing page, company profile, dan toko online yang cantik, cepat, dan mendatangkan pelanggan. Konsultasi gratis via WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
+/* Layout: a scroll of full-bleed "paintings" (one per chapter), giant white chapter titles,
+   floating product UI collaged over each scene, chapter index bottom-left, WhatsApp as the constant CTA. */
 :root{
-  --ink:#0b0b0d;
-  --paper:#f4efe6;
-  --white:#fff;
-  --muted:rgba(255,255,255,.68);
+  --ink:#0b0a09;
+  --white:#ffffff;
+  --muted:rgba(255,255,255,.7);
   --line:rgba(255,255,255,.18);
-  --glass:rgba(18,18,22,.55);
+  --glass:rgba(16,14,12,.58);
   --wa:#25d366;
-  --wa-dark:#128c4a;
-  --gold:#e8c27a;
+  --wa-ink:#04210f;
+  --wa-deep:#128c4a;
+  --gold:#e3bd72;
+  --rose:#ff4f9a;
   --ease:cubic-bezier(.2,0,0,1);
   --ease-premium:cubic-bezier(.4,0,.2,1);
-  --sans:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --serif:"Instrument Serif",Georgia,serif;
+  --sans:"Inter Tight",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --gl:max(28px, env(safe-area-inset-left, 0px));
+  --gr:max(28px, env(safe-area-inset-right, 0px));
+  --rail:200px;
   color-scheme:dark;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--ink);color:var(--white);font-family:var(--sans);line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--ink)}
+body{margin:0;background:var(--ink);color:var(--white);font-family:var(--sans);font-size:16px;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%}
+h1,h2,h3,h4,p,ul,ol{margin:0;padding:0}
 em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0}
+:focus-visible{outline:2px solid var(--wa);outline-offset:3px;border-radius:6px}
 
 /* ---------- Top bar ---------- */
-.topbar{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:flex-start;justify-content:space-between;padding:18px 28px;pointer-events:none}
+.topbar{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;
+  padding:calc(16px + env(safe-area-inset-top, 0px)) var(--gr) 16px var(--gl);pointer-events:none}
 .topbar>*{pointer-events:auto}
-.topbar::before{content:"";position:absolute;inset:0 0 -24px 0;z-index:-1;background:linear-gradient(180deg,rgba(8,8,10,.8),rgba(8,8,10,0));opacity:0;transition:opacity .4s var(--ease-premium);pointer-events:none}
+.topbar::before{content:"";position:absolute;inset:0 0 -30px 0;z-index:-1;background:linear-gradient(180deg,rgba(8,7,6,.78),rgba(8,7,6,0));opacity:0;transition:opacity .4s var(--ease-premium);pointer-events:none}
 .topbar.scrolled::before{opacity:1}
-.brand{font-size:12px;line-height:1.15;font-weight:600;letter-spacing:.01em;text-shadow:0 1px 12px rgba(0,0,0,.5)}
-.brand b{display:block;font-size:14px;font-weight:700}
-.brand span{opacity:.75}
-.nav{display:flex;gap:4px;padding:4px;border-radius:999px;background:rgba(10,10,12,.35);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
-.nav a{font-size:13px;padding:7px 14px;border-radius:999px;transition:background .2s var(--ease)}
-.nav a:hover{background:rgba(255,255,255,.12)}
-.pill{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;padding:10px 18px;border-radius:999px;background:var(--white);color:var(--ink);transition:transform .15s var(--ease),box-shadow .2s var(--ease)}
-.pill:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(0,0,0,.35)}
+.brand{font-size:12px;line-height:1.2;font-weight:500;text-shadow:0 1px 14px rgba(0,0,0,.55)}
+.brand b{display:block;font-size:14px;font-weight:700;letter-spacing:-.01em}
+.brand span{display:block;opacity:.78}
+.top-right{display:flex;align-items:center;gap:18px}
+.top-link{font-size:14px;font-weight:500;text-shadow:0 1px 12px rgba(0,0,0,.5);opacity:.9}
+.top-link:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:600 14px/1 var(--sans);padding:11px 18px;border-radius:999px;border:0;cursor:pointer;background:var(--white);color:var(--ink);transition:transform .15s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease)}
+.pill:hover{transform:translateY(-1px);box-shadow:0 10px 30px rgba(0,0,0,.35)}
 .pill:active{transform:scale(.97)}
 .pill svg{width:18px;height:18px;flex:none}
-.pill.wa{background:var(--wa);color:#04210f}
+.pill.wa{background:var(--wa);color:var(--wa-ink)}
+.pill.ghost{background:rgba(255,255,255,.12);color:var(--white);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 
-/* ---------- Chapter index (left rail, like the edition sidebar) ---------- */
-.rail{position:fixed;left:28px;bottom:28px;z-index:40;font-size:12px;line-height:1.55;list-style:none}
-.rail a{display:flex;gap:10px;align-items:center;opacity:.5;transition:opacity .3s var(--ease),transform .3s var(--ease)}
+/* ---------- Chapter index ---------- */
+.rail{position:fixed;left:var(--gl);bottom:calc(24px + env(safe-area-inset-bottom, 0px));z-index:40;list-style:none;font-size:12px;line-height:1.6;text-shadow:0 1px 10px rgba(0,0,0,.6)}
+.rail a{display:flex;align-items:center;gap:8px;opacity:.55;transition:opacity .3s var(--ease)}
 .rail a i{display:inline-block;width:0;height:1px;background:currentColor;transition:width .35s var(--ease)}
-.rail a.active{opacity:1}
-.rail a.active i{width:18px}
-.rail a:hover{opacity:.9}
+.rail a.active{opacity:1;font-weight:600}
+.rail a.active i{width:16px}
+.rail a:hover{opacity:.95}
 
-/* ---------- Chapters ---------- */
+/* ---------- Chapters & scenes ---------- */
 .chapter{position:relative;--p:0}
-.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;margin-bottom:-100vh;margin-bottom:-100svh;z-index:0}
-.bg{position:absolute;inset:-4%;background-color:var(--fallback,#2a2f45);background-image:var(--img),var(--grad,linear-gradient(160deg,#3b4a7a,#141826));background-size:cover;background-position:var(--pos,center);transform:scale(calc(1.16 - var(--p) * .16)) translateY(calc((var(--p) - .5) * -4%));will-change:transform;filter:saturate(1.08)}
-.stage::after{content:"";position:absolute;inset:0;background:
-  linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 55%,rgba(0,0,0,.7) 100%),
-  radial-gradient(120% 90% at 50% 40%,transparent 50%,rgba(0,0,0,.45) 100%);
-  opacity:calc(.75 + var(--p) * .25)}
+.stage{position:sticky;top:0;height:100vh;height:100lvh;overflow:hidden;margin-bottom:-100vh;margin-bottom:-100lvh;background:var(--base,#1c1a18)}
+.art{position:absolute;left:-5%;top:-5%;width:110%;height:110%;object-fit:cover;display:block;
+  transform:scale(calc(1.14 - var(--p) * .14)) translate3d(0,calc((var(--p) - .5) * -3%),0);will-change:transform;opacity:0;transition:opacity 1.2s var(--ease-premium)}
+.art.ready{opacity:1}
+.stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:
+  linear-gradient(180deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0) 34%,rgba(0,0,0,.5) 62%,rgba(0,0,0,.78) 100%),
+  linear-gradient(90deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 55%)}
 .float{position:absolute;z-index:2;transform:translate3d(0,calc((.5 - var(--p)) * var(--speed,120) * 1px),0) rotate(var(--rot,0deg));will-change:transform}
 
-.cover{position:relative;z-index:3;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 28px 12vh 200px}
-.kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
-.mega{font-weight:700;font-size:clamp(64px,15vw,240px);line-height:.86;letter-spacing:-.055em}
-.mega.hero-t{font-size:clamp(52px,8.6vw,150px);max-width:12ch}
-.mega .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.16em;margin-bottom:-.12em}
-.mega .w>span{display:inline-block;transform:translateY(105%);transition:transform 1s var(--ease)}
-.in .mega .w>span,.mega.in .w>span{transform:none}
-.lede{max-width:560px;margin-top:22px;font-size:clamp(17px,1.6vw,21px);color:rgba(255,255,255,.88);text-shadow:0 1px 18px rgba(0,0,0,.5)}
+.cover{position:relative;z-index:3;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;gap:18px;
+  padding:120px var(--gr) 13vh calc(var(--gl) + var(--rail))}
+.cover.center{align-items:center;text-align:center;justify-content:center;padding-left:var(--gl)}
+.cover.top{justify-content:flex-start;padding-top:20vh}
+.linger{height:55vh}
+.kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-shadow:0 1px 10px rgba(0,0,0,.5)}
+.mega{text-shadow:0 2px 40px rgba(0,0,0,.25);font-weight:700;font-size:clamp(58px,10.5vw,190px);line-height:.88;letter-spacing:-.055em;text-wrap:balance}
+.mega.hero-t{font-size:clamp(50px,8vw,142px);max-width:12ch}
+.mega .w{display:inline-block}
+.mega .w>span{display:inline-block;transition:transform 1s var(--ease),opacity .8s var(--ease-premium);transition-delay:inherit}
+.mega.pre .w>span{transform:translateY(55%);opacity:0}
+.lede{max-width:34em;font-size:clamp(17px,1.5vw,20px);color:rgba(255,255,255,.94);text-shadow:0 1px 2px rgba(0,0,0,.6),0 2px 22px rgba(0,0,0,.75);text-wrap:pretty}
+.cover.center .lede{margin-inline:auto}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.cover.center .actions{justify-content:center}
 
-.content{position:relative;z-index:3;padding:10vh 28px 18vh 200px}
+.content{position:relative;z-index:3;padding:8vh var(--gr) 18vh calc(var(--gl) + var(--rail))}
 .panel{background:var(--glass);backdrop-filter:blur(22px) saturate(1.2);-webkit-backdrop-filter:blur(22px) saturate(1.2);border:1px solid var(--line);border-radius:22px;padding:clamp(22px,3vw,40px)}
-h3.h{font-size:clamp(28px,3.6vw,52px);line-height:1.02;letter-spacing:-.03em;font-weight:600;max-width:18ch}
+.h{font-size:clamp(28px,3.4vw,50px);line-height:1.04;letter-spacing:-.03em;font-weight:600;max-width:20ch;text-wrap:balance}
 .sub{color:var(--muted);max-width:60ch;margin-top:14px;font-size:17px}
 
-/* reveal */
-.rv{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease-premium),transform .7s var(--ease-premium);transition-delay:calc(var(--i,0) * 80ms)}
-.rv.in{opacity:1;transform:none}
+.rv{transition:opacity .7s var(--ease-premium),transform .7s var(--ease-premium);transition-delay:calc(var(--i,0) * 80ms)}
+.rv.pre{opacity:0;transform:translateY(26px)}
 
-/* ---------- Floating UI cards ---------- */
-.ui{background:rgba(255,255,255,.92);color:var(--ink);border-radius:16px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55);font-size:13px;overflow:hidden}
-.ui.dark{background:rgba(16,16,20,.82);color:#fff;border:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+/* ---------- Collage objects (product UI floating over the paintings) ---------- */
+.ui{background:rgba(255,255,255,.94);color:#111;border-radius:16px;box-shadow:0 30px 70px -20px rgba(0,0,0,.6);font-size:13px;overflow:hidden}
+.ui.dark{background:rgba(14,14,18,.84);color:#fff;border:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .chat{width:260px;padding:14px}
 .chat .who{display:flex;align-items:center;gap:10px;font-weight:600}
-.chat .av{width:30px;height:30px;border-radius:50%;background:var(--wa);display:grid;place-items:center;color:#fff}
-.chat .av svg{width:16px;height:16px}
+.av{width:30px;height:30px;border-radius:50%;background:var(--wa);display:grid;place-items:center;color:#fff;flex:none}
+.av svg{width:16px;height:16px}
 .bubble{margin-top:10px;background:#dcf8c6;color:#0b2a14;border-radius:12px 12px 12px 3px;padding:9px 11px;line-height:1.35}
-.bubble.me{background:#fff;border:1px solid #e5e5e5;border-radius:12px 12px 3px 12px;margin-left:30px}
-.meta{font-size:11px;opacity:.55;margin-top:4px;text-align:right}
-.score{width:190px;padding:16px;display:flex;align-items:center;gap:14px}
-.ring{--v:98;width:58px;height:58px;border-radius:50%;background:conic-gradient(var(--wa) calc(var(--v) * 1%),rgba(0,0,0,.08) 0);display:grid;place-items:center;flex:none}
-.ring b{width:46px;height:46px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:16px;color:var(--wa-dark)}
-.score small{display:block;opacity:.6}
+.bubble.me{background:#fff;border:1px solid #e6e6e6;border-radius:12px 12px 3px 12px;margin-left:30px}
+.meta{font-size:11px;opacity:.55;margin-top:5px;text-align:right}
+.sk{height:9px;border-radius:5px;background:#e7e3dc}
+.sk.t{height:20px;width:72%;background:#1b1b1f}
+.sk.b{height:30px;width:44%;border-radius:999px;background:var(--wa)}
+.mini{display:grid;gap:7px;padding:14px}
 .browser{width:340px}
-.browser .bar{display:flex;gap:6px;align-items:center;padding:9px 12px;background:#efefef}
-.browser .bar i{width:9px;height:9px;border-radius:50%;background:#d0d0d0}
-.browser .bar span{margin-left:8px;flex:1;height:16px;border-radius:6px;background:#fff;font-size:10px;line-height:16px;padding:0 8px;color:#777}
-.browser .body{padding:16px;display:grid;gap:8px}
-.sk{height:10px;border-radius:5px;background:#e9e6e1}
-.sk.t{height:22px;width:70%;background:#1b1b1f}
-.sk.b{height:34px;width:46%;border-radius:999px;background:var(--wa)}
+.browser .bar{display:flex;gap:6px;align-items:center;padding:9px 12px;background:#eeece8}
+.browser .bar i{width:9px;height:9px;border-radius:50%;background:#cfccc6}
+.browser .bar span{margin-left:8px;flex:1;height:17px;border-radius:6px;background:#fff;font-size:10px;line-height:17px;padding:0 8px;color:#777;white-space:nowrap;overflow:hidden}
+.laptop{width:420px}
+.laptop .scr{background:#141414;border-radius:14px 14px 0 0;padding:10px 10px 0;box-shadow:0 30px 80px -20px rgba(0,0,0,.7)}
+.laptop .scr .ui{border-radius:6px 6px 0 0;box-shadow:none}
+.laptop .base{height:14px;margin:0 -28px;background:linear-gradient(#d9d6d0,#9c988f);border-radius:0 0 14px 14px}
+.phone{width:170px;padding:8px;border-radius:30px;background:#111;box-shadow:0 30px 70px -18px rgba(0,0,0,.7)}
+.phone .ui{border-radius:22px;box-shadow:none}
+.phone .notch{width:56px;height:14px;border-radius:9px;background:#111;margin:6px auto 0}
+.grid-prod{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.grid-prod div{aspect-ratio:1;border-radius:9px}
+.bag{position:relative;width:96px;height:104px;border-radius:6px 6px 12px 12px;background:linear-gradient(135deg,#ff6fb0,var(--rose) 55%,#c81e6c);box-shadow:0 24px 50px -14px rgba(200,30,108,.7);display:grid;place-items:center;font:800 13px/1 var(--sans);letter-spacing:.08em;color:#fff}
+.bag::before{content:"";position:absolute;top:-30px;left:50%;width:46px;height:44px;margin-left:-23px;border:6px solid #e0347f;border-bottom:0;border-radius:24px 24px 0 0}
+.tag{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:#fff;color:#111;font-weight:700;font-size:14px;box-shadow:0 18px 40px -12px rgba(0,0,0,.55)}
+.tag i{width:9px;height:9px;border-radius:50%;background:var(--wa)}
+.score{width:200px;padding:16px;display:flex;align-items:center;gap:14px}
+.ring{--v:98;width:58px;height:58px;border-radius:50%;background:conic-gradient(var(--wa) calc(var(--v) * 1%),rgba(0,0,0,.08) 0);display:grid;place-items:center;flex:none}
+.ring b{width:46px;height:46px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:16px;color:var(--wa-deep)}
+.score small{display:block;opacity:.6;line-height:1.3}
+.swatch{display:flex;gap:6px;padding:12px}
+.swatch i{width:34px;height:34px;border-radius:9px}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px;width:400px}
+.ba figure{margin:0}
+.ba figcaption{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px;opacity:.6}
+.ba .old{background:#d7d7d7;border-radius:8px;padding:10px;display:grid;gap:6px;filter:grayscale(1)}
+.ba .old .sk{background:#a9a9a9}
+.ba .new{border-radius:8px;padding:10px;display:grid;gap:6px;background:linear-gradient(135deg,#fff,#f3efe8)}
 
-/* ---------- Grids ---------- */
-.grid{display:grid;gap:16px;margin-top:34px}
-.g4{grid-template-columns:repeat(4,1fr)}
-.g3{grid-template-columns:repeat(3,1fr)}
-.g2{grid-template-columns:repeat(2,1fr)}
-.card{border:1px solid var(--line);border-radius:18px;padding:22px;background:rgba(255,255,255,.04);transition:background .25s var(--ease),transform .35s var(--ease)}
-.card:hover{background:rgba(255,255,255,.08);transform:translateY(-3px)}
-.card .n{font-size:12px;color:var(--gold);letter-spacing:.12em}
-.card h4{font-size:21px;letter-spacing:-.02em;margin:10px 0 8px;font-weight:600}
-.card p{color:var(--muted);font-size:15px}
-.ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.1);margin-bottom:14px}
-.ico svg{width:22px;height:22px}
-
+/* ---------- Content blocks ---------- */
 .about{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
-.quote{font-family:var(--serif);font-size:clamp(28px,3.4vw,46px);line-height:1.1;letter-spacing:-.01em}
+.quote{font-family:var(--serif);font-size:clamp(28px,3.2vw,44px);line-height:1.1}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-.tags span{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;color:rgba(255,255,255,.85)}
+.tags span{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;color:rgba(255,255,255,.86)}
+.grid{display:grid;gap:16px;margin-top:32px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{border:1px solid var(--line);border-radius:18px;padding:22px;background:rgba(255,255,255,.04);transition:background .25s var(--ease),transform .35s var(--ease)}
+.card:hover{background:rgba(255,255,255,.08)}
+.card h4{font-size:21px;letter-spacing:-.02em;margin:0 0 8px;font-weight:600}
+.card p{color:var(--muted);font-size:15px}
 
-.steps{counter-reset:s;display:grid;gap:0;margin-top:30px}
-.step{display:grid;grid-template-columns:90px 1fr auto;gap:20px;align-items:baseline;padding:22px 0;border-top:1px solid var(--line)}
+.steps{display:grid;margin-top:28px}
+.step{display:grid;grid-template-columns:84px minmax(0,1fr) auto;gap:20px;align-items:baseline;padding:22px 0;border-top:1px solid var(--line)}
 .step:last-child{border-bottom:1px solid var(--line)}
-.step .k{font-size:44px;font-weight:700;letter-spacing:-.04em;color:var(--gold)}
+.step .k{font-size:42px;font-weight:700;letter-spacing:-.04em;color:var(--gold);font-variant-numeric:tabular-nums}
 .step h4{font-size:22px;font-weight:600;letter-spacing:-.02em}
 .step p{color:var(--muted);margin-top:4px}
 .step .d{font-size:13px;color:var(--muted);white-space:nowrap}
 
-.work{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:rgba(255,255,255,.04);transition:transform .4s var(--ease)}
+.work{display:block;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:rgba(255,255,255,.04);transition:transform .4s var(--ease)}
 .work:hover{transform:translateY(-4px)}
-.work .shot{aspect-ratio:16/10;padding:18px;display:flex;align-items:flex-end;position:relative;overflow:hidden}
-.work .shot .ui{width:78%;transform:translateY(14%) rotate(-2deg);transition:transform .5s var(--ease)}
+.work .shot{aspect-ratio:16/10;max-width:100%;padding:18px;display:flex;align-items:flex-end;overflow:hidden}
+.work .shot .ui{width:80%;transform:translateY(14%) rotate(-2deg);transition:transform .5s var(--ease)}
 .work:hover .shot .ui{transform:translateY(6%) rotate(0)}
 .work .info{padding:16px 18px;display:flex;justify-content:space-between;gap:12px;align-items:center}
 .work .info b{font-weight:600}
 .work .info span{font-size:13px;color:var(--muted)}
 .badge{font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:4px 9px;color:var(--muted);white-space:nowrap}
 
-.promise{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px}
-.promise div{border-left:1px solid var(--line);padding:6px 0 6px 18px}
-.promise b{display:block;font-size:clamp(34px,4vw,56px);letter-spacing:-.045em;font-weight:700;line-height:1}
-.promise span{color:var(--muted);font-size:15px}
-
 .price{display:flex;flex-direction:column;gap:14px}
-.price.hot{background:rgba(255,255,255,.94);color:var(--ink);border-color:transparent}
+.price.hot{background:rgba(255,255,255,.95);color:#111;border-color:transparent}
 .price.hot p,.price.hot li{color:#3b3b40}
-.price .amt{font-size:34px;font-weight:700;letter-spacing:-.035em}
+.price .amt{font-size:34px;font-weight:700;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
 .price .amt small{font-size:14px;font-weight:500;opacity:.6;letter-spacing:0}
 .price ul{list-style:none;display:grid;gap:8px;font-size:15px;color:var(--muted);flex:1}
 .price li::before{content:"✦";color:var(--gold);margin-right:8px}
-.price.hot li::before{color:var(--wa-dark)}
-.price .pill{justify-content:center;margin-top:6px}
-.price:not(.hot) .pill{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)}
-.ribbon{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--wa);color:#04210f;border-radius:999px;padding:4px 10px}
-
+.price.hot li::before{color:var(--wa-deep)}
+.ribbon{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--wa);color:var(--wa-ink);border-radius:999px;padding:5px 10px}
+.faq{margin-top:40px}
 .faq details{border-top:1px solid var(--line);padding:18px 0}
 .faq details:last-child{border-bottom:1px solid var(--line)}
 .faq summary{cursor:pointer;font-size:19px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:20px}
@@ -170,65 +196,70 @@ h3.h{font-size:clamp(28px,3.6vw,52px);line-height:1.02;letter-spacing:-.03em;fon
 .faq p{color:var(--muted);margin-top:10px;max-width:70ch}
 
 /* ---------- WhatsApp center ---------- */
-.wa-center{text-align:center;display:flex;flex-direction:column;align-items:center;padding-left:28px}
-.wa-orb{position:relative;width:min(300px,62vw);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#5cf195,var(--wa) 45%,var(--wa-dark));color:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.2) inset,0 40px 120px -20px rgba(37,211,102,.7);transition:transform .4s var(--ease);margin:10px auto 0}
+.wa-orb{position:relative;width:min(280px,60vw);aspect-ratio:1;max-width:100%;border-radius:50%;display:grid;place-items:center;margin:8px auto 0;
+  background:radial-gradient(circle at 35% 30%,#62f39a,var(--wa) 45%,var(--wa-deep));color:#fff;
+  box-shadow:0 0 0 1px rgba(255,255,255,.22) inset,0 40px 120px -20px rgba(37,211,102,.75);transition:transform .4s var(--ease)}
 .wa-orb:hover{transform:scale(1.04)}
-.wa-orb:active{transform:scale(.98)}
 .wa-orb svg{width:38%;height:38%}
-.wa-orb::before,.wa-orb::after{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid rgba(37,211,102,.6);animation:ripple 3.2s var(--ease-premium) infinite}
+.wa-orb::before,.wa-orb::after{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid rgba(37,211,102,.65);animation:ripple 3.2s var(--ease-premium) infinite}
 .wa-orb::after{animation-delay:1.6s}
 @keyframes ripple{from{transform:scale(1);opacity:.9}to{transform:scale(1.6);opacity:0}}
-.wa-number{font-size:clamp(26px,4vw,44px);font-weight:700;letter-spacing:-.03em;margin-top:28px}
-.form{width:100%;max-width:620px;margin-top:34px;text-align:left;display:grid;gap:12px}
+.wa-number{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px}
+.wa-number b{font-size:clamp(26px,4vw,42px);letter-spacing:-.03em;font-variant-numeric:tabular-nums;user-select:all}
+.copy{font:600 13px/1 var(--sans);color:#fff;background:rgba(255,255,255,.12);border:1px solid var(--line);border-radius:999px;padding:9px 13px;cursor:pointer}
+.copy:hover{background:rgba(255,255,255,.2)}
+.form{width:100%;max-width:640px;margin:30px auto 0;text-align:left;display:grid;gap:12px}
 .form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.form label{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;display:grid;gap:6px}
-.form input,.form select,.form textarea{font:inherit;font-size:16px;color:#fff;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:12px;padding:12px 14px;outline:none;transition:border-color .2s var(--ease),background .2s var(--ease);text-transform:none;letter-spacing:0}
+.form label{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;display:grid;gap:6px;min-width:0}
+.form input,.form select,.form textarea{font:inherit;font-size:16px;color:#fff;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:12px;padding:12px 14px;outline:none;text-transform:none;letter-spacing:0;width:100%;transition:border-color .2s var(--ease),background .2s var(--ease)}
 .form select option{color:#111}
 .form input:focus,.form select:focus,.form textarea:focus{border-color:var(--wa);background:rgba(255,255,255,.1)}
-.form textarea{min-height:96px;resize:vertical}
-.form .pill{justify-content:center;padding:15px 20px;font-size:16px}
+.form textarea{min-height:92px;resize:vertical}
+.form .pill{padding:16px 20px;font-size:16px}
+.form .note{font-size:13px;color:var(--muted);text-transform:none;letter-spacing:0}
 
-.fab{position:fixed;right:22px;bottom:22px;z-index:60;width:62px;height:62px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 14px 40px -8px rgba(37,211,102,.75);transition:transform .2s var(--ease)}
+.fab{position:fixed;right:calc(22px + env(safe-area-inset-right, 0px));bottom:calc(22px + env(safe-area-inset-bottom, 0px));z-index:60;width:62px;height:62px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 14px 40px -8px rgba(37,211,102,.8);transition:transform .2s var(--ease)}
 .fab:hover{transform:scale(1.07)}
 .fab svg{width:30px;height:30px;color:#fff}
 .fab::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--wa);animation:ripple 2.6s var(--ease-premium) infinite}
-.fab .tip{position:absolute;right:74px;white-space:nowrap;background:#fff;color:var(--ink);font-size:13px;font-weight:600;padding:8px 12px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;transform:translateX(8px);transition:opacity .3s var(--ease),transform .3s var(--ease);pointer-events:none}
+.fab .tip{position:absolute;right:74px;white-space:nowrap;background:#fff;color:#111;font-size:13px;font-weight:600;padding:8px 12px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;transform:translateX(8px);transition:opacity .3s var(--ease),transform .3s var(--ease);pointer-events:none}
 .fab.show-tip .tip,.fab:hover .tip{opacity:1;transform:none}
 
-footer{position:relative;z-index:3;padding:40px 28px 110px 200px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--muted);border-top:1px solid var(--line);background:var(--ink)}
-footer a{text-decoration:underline;text-underline-offset:3px}
-
+footer{position:relative;z-index:3;background:var(--ink);border-top:1px solid var(--line);padding:40px var(--gr) calc(110px + env(safe-area-inset-bottom, 0px)) calc(var(--gl) + var(--rail));display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
 .progress{position:fixed;top:0;left:0;height:2px;background:var(--wa);z-index:70;width:calc(var(--sp,0) * 100%)}
 
-/* ---------- Responsive ---------- */
-@media (max-width:1100px){
-  .g4{grid-template-columns:repeat(2,1fr)}
-  .promise{grid-template-columns:repeat(2,1fr);row-gap:28px}
-}
+@media (max-width:1100px){.g3{grid-template-columns:1fr 1fr}}
 @media (max-width:900px){
-  .nav,.rail{display:none}
-  .cover,.content{padding-left:16px;padding-right:16px}
-  footer{padding-left:16px;padding-right:16px}
-  .topbar{padding:14px 16px}
-  .about,.g3,.g2{grid-template-columns:1fr}
-  .float.hide-m{display:none}
-  .browser{width:250px}
+  :root{--gl:max(16px, env(safe-area-inset-left, 0px));--gr:max(16px, env(safe-area-inset-right, 0px));--rail:0px}
+  .rail,.top-link{display:none}
+  .about,.g2,.g3{grid-template-columns:minmax(0,1fr)}
+  .hide-m{display:none}
+  .laptop{width:300px}
+  .browser{width:260px}
   .chat{width:220px}
-  .step{grid-template-columns:56px 1fr}
-  .step .k{font-size:30px}
+  .phone{width:130px}
+  .ba{width:300px}
+  .bag{transform:scale(.75)}
+  .step{grid-template-columns:52px minmax(0,1fr)}
+  .step .k{font-size:28px}
   .step .d{grid-column:2}
+  .cover{padding-bottom:9vh}
+  .float{top:calc(11% + env(safe-area-inset-top, 0px))!important;right:var(--gr)!important;left:auto!important;margin:0!important;
+    transform:translate3d(0,calc((.5 - var(--p)) * var(--speed,120) * .3px),0) rotate(var(--rot,0deg))}
+  .float>*{zoom:.8}
+  .stage::after{background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 16%,rgba(0,0,0,.15) 34%,rgba(0,0,0,.62) 58%,rgba(0,0,0,.82) 100%)}
 }
 @media (max-width:560px){
-  .g4{grid-template-columns:1fr}
-  .form .row{grid-template-columns:1fr}
+  .form .row{grid-template-columns:minmax(0,1fr)}
   .pill.top-cta span{display:none}
-  .mega{letter-spacing:-.05em}
-  .fab{right:16px;bottom:16px}
+  .pill.top-cta{padding:11px}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .bg,.float{transform:none!important}
-  .rv,.mega .w>span{transition:none;opacity:1;transform:none}
+  .art,.float{transform:none!important}
+  .rv,.mega .w>span{transition:none}
+  .rv.pre{opacity:1;transform:none}
+  .mega.pre .w>span{transform:none;opacity:1}
   .wa-orb::before,.wa-orb::after,.fab::after{animation:none}
 }
 </style>
@@ -237,234 +268,262 @@ footer a{text-decoration:underline;text-underline-offset:3px}
 
 <div class="progress" aria-hidden="true"></div>
 
-<!-- ================= TOP BAR ================= -->
 <header class="topbar">
-  <a href="#hero" class="brand"><b data-name>Nama Kamu</b><span>Desainer Web</span><br><span>Edisi Renaisans '26</span></a>
-  <nav class="nav" aria-label="Navigasi utama">
-    <a href="#tentang">Tentang</a>
-    <a href="#layanan">Layanan</a>
-    <a href="#karya">Karya</a>
-    <a href="#paket">Paket</a>
-    <a href="#whatsapp">Kontak</a>
-  </nav>
-  <a class="pill wa top-cta" data-wa="Halo! Saya lihat portofolio kamu dan tertarik bikin website." target="_blank" rel="noopener">
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg><span>Chat WhatsApp</span>
-  </a>
+  <a href="#pembuka" class="brand"><b data-name>Nama Kamu</b><span>Desainer Web</span><span>Edisi Renaisans '26</span></a>
+  <div class="top-right">
+    <a class="top-link" href="#karya">Karya</a>
+    <a class="top-link" href="#paket">Paket harga</a>
+    <a class="pill wa top-cta" data-wa="Halo! Saya lihat portofolio kamu dan tertarik bikin website." target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg><span>Chat WhatsApp</span>
+    </a>
+  </div>
 </header>
 
-<!-- ================= CHAPTER INDEX ================= -->
 <ol class="rail" aria-label="Daftar bab">
-  <li><a href="#hero"><i></i>Pembuka</a></li>
+  <li><a href="#pembuka"><i></i>Pembuka</a></li>
   <li><a href="#tentang"><i></i>Tentang</a></li>
-  <li><a href="#layanan"><i></i>Layanan</a></li>
+  <li><a href="#landing"><i></i>Landing Page</a></li>
+  <li><a href="#profil"><i></i>Company Profile</a></li>
+  <li><a href="#toko"><i></i>Toko Online</a></li>
+  <li><a href="#redesain"><i></i>Redesain</a></li>
   <li><a href="#proses"><i></i>Proses</a></li>
   <li><a href="#karya"><i></i>Karya</a></li>
-  <li><a href="#alasan"><i></i>Alasan</a></li>
   <li><a href="#paket"><i></i>Paket</a></li>
   <li><a href="#whatsapp"><i></i>WhatsApp</a></li>
 </ol>
 
 <main>
 
-<!-- ================= 00 HERO — Botticelli, The Birth of Venus ================= -->
-<section class="chapter" id="hero" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg?width=2400');--grad:linear-gradient(170deg,#9cc3c9,#5d8f8a 45%,#2e4a45);--pos:50% 40%">
+<!-- PEMBUKA — sky, clouds, umbrella pines & cypress; shopping bags flying through the clouds -->
+<section class="chapter" id="pembuka" data-scene="hero" style="--base:#6f9fbf">
   <div class="stage">
-    <div class="bg"></div>
-    <div class="float hide-m" style="top:18%;right:6%;--speed:260;--rot:3deg">
+    <canvas class="art" aria-hidden="true"></canvas>
+    <div class="float" style="top:7%;left:50%;--speed:520;--rot:-14deg"><div class="bag">SALE</div></div>
+    <div class="float hide-m" style="top:54%;left:60%;--speed:700;--rot:12deg"><div class="bag" style="transform:scale(.7)">NEW</div></div>
+    <div class="float hide-m" style="top:16%;right:5%;--speed:260;--rot:3deg">
       <div class="ui chat">
-        <div class="who"><span class="av"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg></span>Calon Klien</div>
+        <div class="who"><span class="av"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg></span>Calon klien</div>
         <div class="bubble">Halo kak, saya mau bikin website buat usaha saya 👋</div>
         <div class="bubble me">Siap! Ceritakan bisnismu, konsultasinya gratis ✨</div>
         <div class="meta">dibalas &lt; 1 jam ✓✓</div>
       </div>
     </div>
-    <div class="float hide-m" style="top:64%;right:8%;--speed:420;--rot:-4deg">
+    <div class="float hide-m" style="top:63%;right:7%;--speed:420;--rot:-4deg">
       <div class="ui score"><div class="ring"><b>98</b></div><div><b>Performa</b><small>Target skor kecepatan setiap proyek</small></div></div>
     </div>
   </div>
   <div class="cover">
     <p class="kicker rv">Portofolio · Desainer Web Freelance</p>
     <h1 class="mega hero-t split">Website yang bikin betah scroll.</h1>
-    <p class="lede rv" style="--i:2">Saya <b data-name>Nama Kamu</b> — desainer web yang mengubah bisnismu menjadi karya seni digital: <em>cantik dipandang</em>, cepat dibuka, dan yang terpenting — <b>mendatangkan pelanggan</b>.</p>
-    <div class="rv" style="--i:3;display:flex;gap:10px;flex-wrap:wrap;margin-top:28px">
-      <a class="pill wa" data-wa="Halo! Saya mau konsultasi gratis soal pembuatan website." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg>Konsultasi Gratis via WhatsApp</a>
-      <a class="pill" href="#karya" style="background:rgba(255,255,255,.14);color:#fff;border:1px solid var(--line)">Lihat karya ↓</a>
+    <p class="lede rv">Saya <b data-name>Nama Kamu</b>. Saya merancang website yang <em>cantik dipandang</em>, cepat dibuka, dan membuat pengunjung ingin terus melihat sampai akhirnya menghubungimu.</p>
+    <div class="actions rv">
+      <a class="pill wa" data-wa="Halo! Saya mau konsultasi gratis soal pembuatan website." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg>Konsultasi gratis via WhatsApp</a>
+      <a class="pill ghost" href="#landing">Lihat layanan ↓</a>
     </div>
   </div>
 </section>
 
-<!-- ================= 01 TENTANG — Vermeer, The Art of Painting ================= -->
-<section class="chapter" id="tentang" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/Jan_Vermeer_-_The_Art_of_Painting_-_Google_Art_Project.jpg?width=2400');--grad:linear-gradient(160deg,#6b5a3e,#2a2218);--pos:50% 30%">
+<!-- TENTANG — a scholar's study: arched window, bookshelves, open manuscript -->
+<section class="chapter" id="tentang" data-scene="study" style="--base:#3a2a1c">
   <div class="stage">
-    <div class="bg"></div>
-    <div class="float hide-m" style="top:16%;right:8%;--speed:300;--rot:-3deg">
-      <div class="ui browser"><div class="bar"><i></i><i></i><i></i><span>bisnismu.com</span></div><div class="body"><div class="sk t"></div><div class="sk"></div><div class="sk" style="width:80%"></div><div class="sk b"></div></div></div>
+    <canvas class="art" aria-hidden="true"></canvas>
+    <div class="float hide-m" style="top:16%;left:40%;--speed:300;--rot:-3deg">
+      <div class="ui browser"><div class="bar"><i></i><i></i><i></i><span>bisnismu.com</span></div><div class="mini"><div class="sk t"></div><div class="sk"></div><div class="sk" style="width:80%"></div><div class="sk b"></div></div></div>
+    </div>
+    <div class="float hide-m" style="top:46%;left:56%;--speed:440;--rot:5deg">
+      <div class="ui swatch"><i style="background:#1d2b4a"></i><i style="background:#e3bd72"></i><i style="background:#25d366"></i><i style="background:#f3efe8"></i></div>
     </div>
   </div>
   <div class="cover">
-    <p class="kicker rv">Bab 01</p>
+    <p class="kicker rv">Tentang saya</p>
     <h2 class="mega split">Tentang</h2>
-    <p class="lede rv" style="--i:2">Seperti pelukis di studionya, saya menggarap setiap website dengan detail — bukan template asal jadi.</p>
+    <p class="lede rv">Seperti pelukis di studionya, saya menggarap setiap website dengan detail. Tidak ada template asal jadi.</p>
   </div>
   <div class="content">
     <div class="panel about rv">
       <div>
-        <p class="quote">“Desain yang baik itu tak terlihat. Yang terasa hanyalah: <em>saya ingin terus scroll</em> — lalu menekan tombol beli.”</p>
-        <div class="tags">
-          <span>UI/UX Design</span><span>Landing Page</span><span>Company Profile</span><span>Toko Online</span><span>Figma</span><span>Webflow / WordPress</span><span>HTML · CSS · JS</span><span>SEO dasar</span>
-        </div>
+        <p class="quote">“Desain yang baik tidak terasa seperti desain. Yang terasa hanya <em>ingin terus scroll</em>, lalu menekan tombol pesan.”</p>
+        <div class="tags"><span>UI/UX Design</span><span>Landing Page</span><span>Company Profile</span><span>Toko Online</span><span>Figma</span><span>Webflow / WordPress</span><span>HTML · CSS · JS</span><span>SEO dasar</span></div>
       </div>
       <div>
         <h3 class="h" style="font-size:clamp(24px,2.4vw,34px)">Halo, saya <span data-name>Nama Kamu</span>.</h3>
-        <p class="sub">Saya desainer web yang membantu UMKM, brand lokal, dan profesional tampil meyakinkan di internet. Fokus saya sederhana: website yang <b>membangun kepercayaan</b> dalam 3 detik pertama dan <b>mengarahkan pengunjung untuk menghubungimu</b>.</p>
-        <p class="sub">Setiap proyek saya tangani langsung — dari riset, desain, sampai website online. Kamu cukup bicara dengan satu orang, lewat satu chat WhatsApp.</p>
+        <p class="sub">Saya desainer web yang membantu UMKM, brand lokal, dan profesional tampil meyakinkan di internet. Fokus saya: website yang <b>membangun kepercayaan dalam 3 detik pertama</b> dan <b>mengarahkan pengunjung untuk menghubungimu</b>.</p>
+        <p class="sub">Setiap proyek saya tangani langsung, dari riset, desain, sampai website online. Kamu cukup bicara dengan satu orang lewat satu chat WhatsApp.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= 02 LAYANAN — Raphael, The School of Athens ================= -->
-<section class="chapter" id="layanan" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg?width=2400');--grad:linear-gradient(170deg,#c9b48f,#7d6a4f 50%,#3a3125)">
-  <div class="stage"><div class="bg"></div></div>
-  <div class="cover">
-    <p class="kicker rv">Bab 02</p>
-    <h2 class="mega split">Layanan</h2>
-    <p class="lede rv" style="--i:2">Satu desainer, semua yang bisnismu butuhkan untuk tampil online.</p>
-  </div>
-  <div class="content">
-    <div class="panel">
-      <h3 class="h rv">Pilih kebutuhanmu — saya urus sisanya.</h3>
-      <div class="grid g4">
-        <div class="card rv" style="--i:1"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5h16v14H4z"/><path d="M4 9h16M8 13h5M8 16h8"/></svg></div><span class="n">01</span><h4>Landing Page</h4><p>Satu halaman yang fokus menjual. Cocok untuk promo produk, jasa, atau event — langsung terhubung ke WhatsApp.</p></div>
-        <div class="card rv" style="--i:2"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></div><span class="n">02</span><h4>Company Profile</h4><p>Website multi-halaman yang membuat bisnismu terlihat profesional dan terpercaya di mata klien.</p></div>
-        <div class="card rv" style="--i:3"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6h15l-2 9H8L6 3H3"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg></div><span class="n">03</span><h4>Toko Online</h4><p>Katalog produk yang cantik dengan alur pesan yang mudah — via checkout atau langsung ke chat.</p></div>
-        <div class="card rv" style="--i:4"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div><span class="n">04</span><h4>Redesain Website</h4><p>Website lama terasa ketinggalan zaman? Saya perbarui tampilan, kecepatan, dan alurnya.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 03 PROSES — Michelangelo, The Creation of Adam ================= -->
-<section class="chapter" id="proses" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/Michelangelo_-_Creation_of_Adam_(cropped).jpg?width=2400');--grad:linear-gradient(160deg,#cdbb9c,#8a7457 55%,#3b3022)">
+<!-- LANDING PAGE — night sky with an armillary sphere -->
+<section class="chapter" id="landing" data-scene="cosmos" style="--base:#0b1236">
   <div class="stage">
-    <div class="bg"></div>
-    <div class="float hide-m" style="top:14%;left:42%;--speed:340;--rot:2deg">
+    <canvas class="art" aria-hidden="true"></canvas>
+    <div class="float" style="top:20%;right:7%;--speed:320;--rot:-3deg">
+      <div class="laptop"><div class="scr"><div class="ui"><div class="mini" style="background:linear-gradient(135deg,#fff,#eef3ff)"><div class="sk t" style="background:#1d2b6a;width:60%"></div><div class="sk" style="width:85%"></div><div class="sk" style="width:65%"></div><div style="display:flex;gap:6px"><div class="sk b"></div><div class="sk" style="height:30px;width:30%;border-radius:999px"></div></div><div class="sk" style="height:70px;background:#dfe6ff"></div></div></div></div><div class="base"></div></div>
+    </div>
+    <div class="float hide-m" style="top:16%;right:36%;--speed:560;--rot:8deg"><span class="tag"><i></i>+ Tombol WhatsApp</span></div>
+  </div>
+  <div class="cover">
+    <p class="kicker rv">Layanan 01</p>
+    <h2 class="mega split">Landing Page</h2>
+    <p class="lede rv">Satu halaman, satu tujuan: membuat pengunjung langsung chat kamu. Cocok untuk promo produk, jasa, event, atau iklan Instagram dan TikTok.</p>
+    <div class="actions rv"><a class="pill wa" data-wa="Halo! Saya mau bikin Landing Page. Bisa konsultasi dulu?" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg>Tanya soal landing page</a></div>
+  </div>
+  <div class="linger"></div>
+</section>
+
+<!-- COMPANY PROFILE — marble loggia in one-point perspective -->
+<section class="chapter" id="profil" data-scene="arcade" style="--base:#b9a888">
+  <div class="stage">
+    <canvas class="art" aria-hidden="true"></canvas>
+    <div class="float" style="top:30%;left:50%;margin-left:-170px;--speed:260">
+      <div class="ui browser"><div class="bar"><i></i><i></i><i></i><span>perusahaanmu.co.id</span></div><div class="mini"><div style="display:flex;justify-content:space-between"><div class="sk" style="width:28%;background:#1b1b1f"></div><div class="sk" style="width:40%"></div></div><div class="sk t" style="width:80%;height:26px"></div><div class="sk" style="width:60%"></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px"><div class="sk" style="height:44px"></div><div class="sk" style="height:44px"></div><div class="sk" style="height:44px"></div></div></div></div>
+    </div>
+    <div class="float hide-m" style="top:22%;left:68%;--speed:480;--rot:6deg"><span class="tag"><i></i>Terpercaya sejak pandangan pertama</span></div>
+  </div>
+  <div class="cover">
+    <p class="kicker rv">Layanan 02</p>
+    <h2 class="mega split">Company Profile</h2>
+    <p class="lede rv">Website multi-halaman yang membuat bisnismu terlihat mapan dan profesional. Klien besar menilai dari website sebelum mereka menelepon.</p>
+    <div class="actions rv"><a class="pill wa" data-wa="Halo! Saya mau bikin website Company Profile. Bisa konsultasi dulu?" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg>Tanya soal company profile</a></div>
+  </div>
+  <div class="linger"></div>
+</section>
+
+<!-- TOKO ONLINE — coffered dome with an open oculus and doves -->
+<section class="chapter" id="toko" data-scene="dome" style="--base:#6b5a44">
+  <div class="stage">
+    <canvas class="art" aria-hidden="true"></canvas>
+    <div class="float" style="top:18%;right:12%;--speed:380;--rot:6deg">
+      <div class="phone"><div class="ui"><div class="notch"></div><div class="mini"><div class="sk t" style="width:55%;height:14px"></div><div class="grid-prod"><div style="background:#f6c9d9"></div><div style="background:#cfe3f7"></div><div style="background:#f7e2b8"></div><div style="background:#d6efd9"></div></div><div class="sk b" style="width:100%"></div></div></div></div>
+    </div>
+    <div class="float hide-m" style="top:62%;left:66%;--speed:560;--rot:-10deg"><div class="bag">SHOP</div></div>
+    <div class="float hide-m" style="top:13%;left:30%;--speed:460;--rot:-6deg"><span class="tag"><i></i>Pesanan baru · Rp249.000</span></div>
+  </div>
+  <div class="cover">
+    <p class="kicker rv">Layanan 03</p>
+    <h2 class="mega split">Toko Online</h2>
+    <p class="lede rv">Katalog produk yang cantik dengan alur belanja yang mudah, lewat checkout atau langsung pesan di WhatsApp. Tokomu buka 24 jam tanpa harus kamu jaga.</p>
+    <div class="actions rv"><a class="pill wa" data-wa="Halo! Saya mau bikin Toko Online. Bisa konsultasi dulu?" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg>Tanya soal toko online</a></div>
+  </div>
+  <div class="linger"></div>
+</section>
+
+<!-- REDESAIN — black & white engraving of a landscape -->
+<section class="chapter" id="redesain" data-scene="engraving" style="--base:#111110">
+  <div class="stage">
+    <canvas class="art" aria-hidden="true"></canvas>
+    <div class="float" style="top:20%;right:6%;--speed:300;--rot:-2deg">
+      <div class="ui ba">
+        <figure><figcaption>Sebelum</figcaption><div class="old"><div class="sk" style="height:14px;width:70%"></div><div class="sk"></div><div class="sk"></div><div class="sk" style="width:50%"></div><div class="sk" style="height:40px"></div></div></figure>
+        <figure><figcaption>Sesudah</figcaption><div class="new"><div class="sk t" style="height:14px"></div><div class="sk" style="width:85%"></div><div class="sk b" style="height:18px"></div><div class="sk" style="height:40px;background:linear-gradient(135deg,#ffd6e6,#cfe3f7)"></div></div></figure>
+      </div>
+    </div>
+  </div>
+  <div class="cover">
+    <p class="kicker rv">Layanan 04</p>
+    <h2 class="mega split">Redesain</h2>
+    <p class="lede rv">Website lama terasa kusam dan lambat? Saya beri warna baru: tampilan modern, loading cepat, dan alur yang mengubah pengunjung jadi pembeli.</p>
+    <div class="actions rv"><a class="pill wa" data-wa="Halo! Website saya ingin di-redesain. Bisa dicek dulu?" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg>Cek website lamaku</a></div>
+  </div>
+  <div class="linger"></div>
+</section>
+
+<!-- PROSES — golden-hour valley with distant mountains -->
+<section class="chapter" id="proses" data-scene="golden" style="--base:#c99a62">
+  <div class="stage">
+    <canvas class="art" aria-hidden="true"></canvas>
+    <div class="float hide-m" style="top:15%;right:9%;--speed:340;--rot:2deg">
       <div class="ui dark chat"><div class="who">✦ Progres proyek</div><div class="sk" style="margin-top:12px;background:rgba(255,255,255,.15)"><div style="width:72%;height:100%;border-radius:5px;background:var(--wa)"></div></div><div class="meta" style="text-align:left">Desain disetujui · 72%</div></div>
     </div>
   </div>
   <div class="cover">
-    <p class="kicker rv">Bab 03</p>
+    <p class="kicker rv">Cara kerja</p>
     <h2 class="mega split">Proses</h2>
-    <p class="lede rv" style="--i:2">Dari sentuhan pertama ide sampai website hidup — jelas, transparan, tanpa drama.</p>
+    <p class="lede rv">Dari ide pertama sampai website online, prosesnya jelas dan transparan.</p>
   </div>
   <div class="content">
     <div class="panel">
       <h3 class="h rv">Empat langkah. Kamu selalu tahu progresnya.</h3>
       <div class="steps">
         <div class="step rv"><span class="k">01</span><div><h4>Ngobrol di WhatsApp</h4><p>Ceritakan bisnis, target pelanggan, dan website impianmu. Gratis, tanpa komitmen.</p></div><span class="d">Hari 1</span></div>
-        <div class="step rv"><span class="k">02</span><div><h4>Riset &amp; Desain</h4><p>Saya pelajari kompetitor dan buat desain visual yang bisa kamu lihat dan komentari sebelum dibangun.</p></div><span class="d">Hari 2–5</span></div>
+        <div class="step rv"><span class="k">02</span><div><h4>Riset &amp; desain</h4><p>Saya pelajari kompetitor dan buat desain visual yang bisa kamu lihat dan komentari sebelum dibangun.</p></div><span class="d">Hari 2–5</span></div>
         <div class="step rv"><span class="k">03</span><div><h4>Pembangunan</h4><p>Desain diubah jadi website responsif, cepat, dan rapi di HP maupun laptop.</p></div><span class="d">Hari 6–10</span></div>
-        <div class="step rv"><span class="k">04</span><div><h4>Online &amp; Pendampingan</h4><p>Website dipasang di domainmu, plus panduan singkat dan dukungan setelah rilis.</p></div><span class="d">Hari 11–14</span></div>
+        <div class="step rv"><span class="k">04</span><div><h4>Online &amp; pendampingan</h4><p>Website dipasang di domainmu, lengkap dengan panduan singkat dan dukungan setelah rilis.</p></div><span class="d">Hari 11–14</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= 04 KARYA — Botticelli, Primavera ================= -->
-<section class="chapter" id="karya" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/Botticelli-primavera.jpg?width=2400');--grad:linear-gradient(170deg,#3d4a32,#1c2318)">
-  <div class="stage"><div class="bg"></div></div>
+<!-- KARYA — dusk landscape with cypress -->
+<section class="chapter" id="karya" data-scene="dusk" style="--base:#4a3a52">
+  <div class="stage"><canvas class="art" aria-hidden="true"></canvas></div>
   <div class="cover">
-    <p class="kicker rv">Bab 04</p>
+    <p class="kicker rv">Konsep desain</p>
     <h2 class="mega split">Karya</h2>
-    <p class="lede rv" style="--i:2">Beberapa konsep desain yang menunjukkan cara saya berpikir. Bisnismu bisa jadi yang berikutnya.</p>
+    <p class="lede rv">Beberapa konsep yang menunjukkan cara saya berpikir. Bisnismu bisa jadi yang berikutnya.</p>
   </div>
   <div class="content">
     <div class="panel">
       <h3 class="h rv">Setiap brand punya cerita. Saya membuatnya terlihat.</h3>
+      <!-- Ganti setiap kartu dengan proyek nyata kamu (screenshot + link). -->
       <div class="grid g2">
-        <!-- Ganti setiap kartu dengan proyek nyata kamu (screenshot + link). -->
-        <a class="work rv" style="--i:1" href="#whatsapp">
-          <div class="shot" style="background:linear-gradient(135deg,#c98a5b,#6b3a24)"><div class="ui browser"><div class="bar"><i></i><i></i><i></i><span>kopisenja.id</span></div><div class="body"><div class="sk t" style="background:#5a2f1c"></div><div class="sk"></div><div class="sk b" style="background:#c98a5b"></div></div></div></div>
-          <div class="info"><div><b>Kopi Senja</b><br><span>Landing page kafe & menu online</span></div><span class="badge">Konsep</span></div>
+        <a class="work rv" href="#whatsapp">
+          <div class="shot" style="background:linear-gradient(135deg,#c98a5b,#6b3a24)"><div class="ui browser"><div class="bar"><i></i><i></i><i></i><span>kopisenja.id</span></div><div class="mini"><div class="sk t" style="background:#5a2f1c"></div><div class="sk"></div><div class="sk b" style="background:#c98a5b"></div></div></div></div>
+          <div class="info"><div><b>Kopi Senja</b><br><span>Landing page kafe &amp; menu online</span></div><span class="badge">Konsep</span></div>
         </a>
-        <a class="work rv" style="--i:2" href="#whatsapp">
-          <div class="shot" style="background:linear-gradient(135deg,#3557a8,#121d3d)"><div class="ui browser"><div class="bar"><i></i><i></i><i></i><span>batiklaras.com</span></div><div class="body"><div class="sk t" style="background:#24396f"></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px"><div class="sk" style="height:42px"></div><div class="sk" style="height:42px"></div><div class="sk" style="height:42px"></div></div><div class="sk b" style="background:#3557a8"></div></div></div></div>
+        <a class="work rv" href="#whatsapp">
+          <div class="shot" style="background:linear-gradient(135deg,#3557a8,#121d3d)"><div class="ui browser"><div class="bar"><i></i><i></i><i></i><span>batiklaras.com</span></div><div class="mini"><div class="sk t" style="background:#24396f"></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px"><div class="sk" style="height:42px"></div><div class="sk" style="height:42px"></div><div class="sk" style="height:42px"></div></div><div class="sk b" style="background:#3557a8"></div></div></div></div>
           <div class="info"><div><b>Batik Laras</b><br><span>Toko online fesyen lokal</span></div><span class="badge">Konsep</span></div>
         </a>
-        <a class="work rv" style="--i:3" href="#whatsapp">
-          <div class="shot" style="background:linear-gradient(135deg,#5fb6a8,#1d4d47)"><div class="ui browser"><div class="bar"><i></i><i></i><i></i><span>kliniksehat.co.id</span></div><div class="body"><div class="sk t" style="background:#1d4d47"></div><div class="sk"></div><div class="sk" style="width:60%"></div><div class="sk b" style="background:#5fb6a8"></div></div></div></div>
-          <div class="info"><div><b>Klinik Sehat</b><br><span>Company profile & booking jadwal</span></div><span class="badge">Konsep</span></div>
+        <a class="work rv" href="#whatsapp">
+          <div class="shot" style="background:linear-gradient(135deg,#5fb6a8,#1d4d47)"><div class="ui browser"><div class="bar"><i></i><i></i><i></i><span>kliniksehat.co.id</span></div><div class="mini"><div class="sk t" style="background:#1d4d47"></div><div class="sk"></div><div class="sk" style="width:60%"></div><div class="sk b" style="background:#5fb6a8"></div></div></div></div>
+          <div class="info"><div><b>Klinik Sehat</b><br><span>Company profile &amp; booking jadwal</span></div><span class="badge">Konsep</span></div>
         </a>
-        <a class="work rv" style="--i:4" href="#whatsapp">
-          <div class="shot" style="background:linear-gradient(135deg,#b45a7c,#3e1a2a)"><div class="ui browser"><div class="bar"><i></i><i></i><i></i><span>studiorasa.id</span></div><div class="body"><div class="sk t" style="background:#3e1a2a"></div><div class="sk" style="height:60px"></div><div class="sk b" style="background:#b45a7c"></div></div></div></div>
-          <div class="info"><div><b>Studio Rasa</b><br><span>Portofolio fotografer & wedding</span></div><span class="badge">Konsep</span></div>
+        <a class="work rv" href="#whatsapp">
+          <div class="shot" style="background:linear-gradient(135deg,#b45a7c,#3e1a2a)"><div class="ui browser"><div class="bar"><i></i><i></i><i></i><span>studiorasa.id</span></div><div class="mini"><div class="sk t" style="background:#3e1a2a"></div><div class="sk" style="height:60px"></div><div class="sk b" style="background:#b45a7c"></div></div></div></div>
+          <div class="info"><div><b>Studio Rasa</b><br><span>Portofolio fotografer &amp; wedding</span></div><span class="badge">Konsep</span></div>
         </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ================= 05 ALASAN — Friedrich, Wanderer above the Sea of Fog ================= -->
-<section class="chapter" id="alasan" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/Caspar_David_Friedrich_-_Wanderer_above_the_sea_of_fog.jpeg?width=2400');--grad:linear-gradient(180deg,#8a97a6,#3a4450 60%,#1a1f25);--pos:50% 25%">
-  <div class="stage"><div class="bg"></div></div>
+<!-- PAKET — velvet study at night -->
+<section class="chapter" id="paket" data-scene="velvet" style="--base:#1e2a1c">
+  <div class="stage"><canvas class="art" aria-hidden="true"></canvas></div>
   <div class="cover">
-    <p class="kicker rv">Bab 05</p>
-    <h2 class="mega split">Alasan</h2>
-    <p class="lede rv" style="--i:2">Kenapa memilih saya? Karena website-mu harus berdiri di atas kompetitor — bukan tenggelam di antara mereka.</p>
-  </div>
-  <div class="content">
-    <div class="panel">
-      <h3 class="h rv">Bukan sekadar cantik. Website yang <em>bekerja</em> untukmu.</h3>
-      <div class="promise">
-        <div class="rv" style="--i:1"><b>&lt;1 jam</b><span>Waktu balas chat di jam kerja</span></div>
-        <div class="rv" style="--i:2"><b>14 hari</b><span>Rata-rata target website online</span></div>
-        <div class="rv" style="--i:3"><b>100%</b><span>Responsif di HP, tablet &amp; laptop</span></div>
-        <div class="rv" style="--i:4"><b>Gratis</b><span>Konsultasi &amp; estimasi biaya</span></div>
-      </div>
-      <div class="grid g3" style="margin-top:40px">
-        <div class="card rv"><h4>Desain yang menjual</h4><p>Tata letak, warna, dan kata-kata disusun untuk satu tujuan: membuat pengunjung menghubungimu.</p></div>
-        <div class="card rv" style="--i:1"><h4>Cepat &amp; ramah SEO</h4><p>Website ringan yang mudah ditemukan di Google — karena pelanggan tidak suka menunggu.</p></div>
-        <div class="card rv" style="--i:2"><h4>Langsung ke WhatsApp</h4><p>Setiap halaman punya jalan pintas ke chat. Calon pembeli tinggal satu klik untuk order.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= 06 PAKET — Van Eyck, Arnolfini Portrait ================= -->
-<section class="chapter" id="paket" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/Van_Eyck_-_Arnolfini_Portrait.jpg?width=2400');--grad:linear-gradient(160deg,#3f4a2c,#1b1f14);--pos:50% 35%">
-  <div class="stage"><div class="bg"></div></div>
-  <div class="cover">
-    <p class="kicker rv">Bab 06</p>
+    <p class="kicker rv">Investasi</p>
     <h2 class="mega split">Paket</h2>
-    <p class="lede rv" style="--i:2">Investasi yang jelas sejak awal. Tanpa biaya tersembunyi.</p>
+    <p class="lede rv">Harga jelas sejak awal, tanpa biaya tersembunyi.</p>
   </div>
   <div class="content">
     <div class="panel">
       <h3 class="h rv">Pilih paket, atau minta penawaran khusus.</h3>
       <!-- Sesuaikan harga & isi paket dengan tarif kamu. -->
       <div class="grid g3">
-        <div class="card price rv" style="--i:1">
+        <div class="card price rv">
           <h4>Starter</h4><p>Untuk usaha yang baru mulai online.</p>
           <div class="amt">Rp1,5jt<small> mulai</small></div>
-          <ul><li>1 halaman landing page</li><li>Desain responsif</li><li>Tombol WhatsApp & Maps</li><li>2× revisi</li></ul>
-          <a class="pill" data-wa="Halo! Saya tertarik dengan Paket Starter. Bisa dijelaskan lebih lanjut?" target="_blank" rel="noopener">Tanya paket ini</a>
+          <ul><li>1 halaman landing page</li><li>Desain responsif</li><li>Tombol WhatsApp &amp; Maps</li><li>2× revisi</li></ul>
+          <a class="pill ghost" data-wa="Halo! Saya tertarik dengan Paket Starter. Bisa dijelaskan lebih lanjut?" target="_blank" rel="noopener">Tanya paket ini</a>
         </div>
-        <div class="card price hot rv" style="--i:2">
+        <div class="card price hot rv">
           <span class="ribbon">Paling diminati</span>
           <h4>Bisnis</h4><p>Website profesional untuk membangun kepercayaan.</p>
           <div class="amt">Rp3,5jt<small> mulai</small></div>
-          <ul><li>Hingga 5 halaman</li><li>Copywriting yang menjual</li><li>SEO dasar & Google Analytics</li><li>Domain + hosting 1 tahun</li><li>Revisi sampai puas</li></ul>
+          <ul><li>Hingga 5 halaman</li><li>Copywriting yang menjual</li><li>SEO dasar &amp; Google Analytics</li><li>Domain + hosting 1 tahun</li><li>Revisi sampai puas</li></ul>
           <a class="pill wa" data-wa="Halo! Saya tertarik dengan Paket Bisnis. Bisa dijelaskan lebih lanjut?" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg>Ambil paket ini</a>
         </div>
-        <div class="card price rv" style="--i:3">
+        <div class="card price rv">
           <h4>Premium</h4><p>Toko online atau website dengan fitur khusus.</p>
           <div class="amt">Rp7jt<small> mulai</small></div>
-          <ul><li>Halaman tanpa batas</li><li>Katalog / toko online</li><li>Animasi & interaksi custom</li><li>Pendampingan 3 bulan</li></ul>
-          <a class="pill" data-wa="Halo! Saya tertarik dengan Paket Premium. Bisa dijelaskan lebih lanjut?" target="_blank" rel="noopener">Tanya paket ini</a>
+          <ul><li>Halaman tanpa batas</li><li>Katalog / toko online</li><li>Animasi &amp; interaksi custom</li><li>Pendampingan 3 bulan</li></ul>
+          <a class="pill ghost" data-wa="Halo! Saya tertarik dengan Paket Premium. Bisa dijelaskan lebih lanjut?" target="_blank" rel="noopener">Tanya paket ini</a>
         </div>
       </div>
-      <div class="faq" style="margin-top:44px">
-        <details class="rv"><summary>Saya belum punya konten atau logo, bisa?</summary><p>Bisa. Saya bantu susun kata-kata (copywriting) dan arahan visual. Kamu cukup ceritakan bisnismu.</p></details>
+      <div class="faq">
+        <details class="rv"><summary>Saya belum punya konten atau logo, bisa?</summary><p>Bisa. Saya bantu menyusun kata-kata (copywriting) dan arahan visual. Kamu cukup ceritakan bisnismu.</p></details>
         <details class="rv"><summary>Bagaimana sistem pembayarannya?</summary><p>Umumnya DP 50% untuk mulai, dan pelunasan setelah website siap dan kamu puas dengan hasilnya.</p></details>
         <details class="rv"><summary>Apakah website bisa saya ubah sendiri nanti?</summary><p>Bisa. Saya sediakan panduan singkat, dan untuk paket tertentu website dibuat dengan panel yang mudah diedit.</p></details>
       </div>
@@ -472,43 +531,40 @@ footer a{text-decoration:underline;text-underline-offset:3px}
   </div>
 </section>
 
-<!-- ================= 07 WHATSAPP — Van Gogh, The Starry Night (pusat website) ================= -->
-<section class="chapter" id="whatsapp" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg?width=2400');--grad:radial-gradient(circle at 70% 20%,#3c5aa6,#0f1a3d 60%,#060a18)">
+<!-- WHATSAPP — swirling starry night over sleeping hills (the centre of the site) -->
+<section class="chapter" id="whatsapp" data-scene="starry" style="--base:#0d1a4a">
   <div class="stage">
-    <div class="bg"></div>
-    <div class="float hide-m" style="top:58%;left:7%;--speed:280;--rot:-5deg">
+    <canvas class="art" aria-hidden="true"></canvas>
+    <div class="float hide-m" style="top:60%;left:6%;--speed:280;--rot:-5deg">
       <div class="ui chat"><div class="who"><span class="av"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg></span><span data-name>Nama Kamu</span></div><div class="bubble">Hai! Ada yang bisa saya bantu untuk website-mu? 😊</div><div class="meta">online</div></div>
     </div>
   </div>
-  <div class="cover wa-center" style="justify-content:center;padding-bottom:6vh;padding-top:14vh">
-    <p class="kicker rv">Bab 07 · Pusat semuanya</p>
-    <h2 class="mega split" style="font-size:clamp(56px,12vw,200px)">Ayo ngobrol.</h2>
-    <p class="lede rv" style="--i:2;margin-left:auto;margin-right:auto">Website impianmu dimulai dari satu pesan. Klik tombol hijau di bawah — konsultasi gratis, tanpa komitmen.</p>
-    <a class="wa-orb rv" style="--i:3" data-wa="Halo! Saya mau konsultasi gratis soal pembuatan website." target="_blank" rel="noopener" aria-label="Chat WhatsApp sekarang">
+  <div class="cover center" style="padding-top:16vh;padding-bottom:12vh">
+    <p class="kicker rv">Pusat semuanya</p>
+    <h2 class="mega split" style="font-size:clamp(54px,11vw,190px)">Ayo ngobrol.</h2>
+    <p class="lede rv">Website impianmu dimulai dari satu pesan. Tekan tombol hijau untuk konsultasi gratis, tanpa komitmen.</p>
+    <a class="wa-orb rv" data-wa="Halo! Saya mau konsultasi gratis soal pembuatan website." target="_blank" rel="noopener" aria-label="Chat WhatsApp sekarang">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg>
     </a>
-    <p class="wa-number rv" style="--i:4" data-wa-display>+62 812-3456-7890</p>
-    <p class="sub rv" style="--i:5;margin:6px auto 0">Slot proyek terbatas setiap bulan agar setiap klien mendapat perhatian penuh.</p>
+    <div class="wa-number rv"><b data-wa-display>+62 812-3456-7890</b><button class="copy" type="button" id="copyNum">Salin nomor</button></div>
+    <p class="sub rv" style="margin:0 auto">Slot proyek terbatas setiap bulan agar setiap klien mendapat perhatian penuh.</p>
 
-    <form class="form panel rv" id="waForm" style="--i:6">
+    <form class="form panel rv" id="waForm">
       <div class="row">
-        <label>Nama kamu<input name="nama" required placeholder="mis. Budi"></label>
-        <label>Nama bisnis<input name="bisnis" placeholder="mis. Kopi Senja"></label>
+        <label for="f-nama">Nama kamu<input id="f-nama" name="nama" value="Budi" autocomplete="name"></label>
+        <label for="f-bisnis">Nama bisnis<input id="f-bisnis" name="bisnis" value="Kopi Senja"></label>
       </div>
       <div class="row">
-        <label>Kebutuhan
-          <select name="layanan">
-            <option>Landing Page</option><option>Company Profile</option><option>Toko Online</option><option>Redesain Website</option><option>Belum tahu, mau konsultasi</option>
-          </select>
+        <label for="f-layanan">Kebutuhan
+          <select id="f-layanan" name="layanan"><option>Landing Page</option><option>Company Profile</option><option>Toko Online</option><option>Redesain Website</option><option>Belum tahu, mau konsultasi</option></select>
         </label>
-        <label>Perkiraan budget
-          <select name="budget">
-            <option>Belum ditentukan</option><option>&lt; Rp2 juta</option><option>Rp2–5 juta</option><option>Rp5–10 juta</option><option>&gt; Rp10 juta</option>
-          </select>
+        <label for="f-budget">Perkiraan budget
+          <select id="f-budget" name="budget"><option>Belum ditentukan</option><option>&lt; Rp2 juta</option><option selected>Rp2–5 juta</option><option>Rp5–10 juta</option><option>&gt; Rp10 juta</option></select>
         </label>
       </div>
-      <label>Ceritakan singkat<textarea name="pesan" placeholder="Saya ingin website yang…"></textarea></label>
-      <button class="pill wa" type="submit"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg>Kirim lewat WhatsApp</button>
+      <label for="f-pesan">Ceritakan singkat<textarea id="f-pesan" name="pesan">Saya ingin website untuk kafe saya, ada menu dan tombol pesan.</textarea></label>
+      <a class="pill wa" id="waSend" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg>Kirim lewat WhatsApp</a>
+      <span class="note">Isian di atas otomatis menjadi pesan WhatsApp. Kamu bisa mengubahnya lagi sebelum mengirim.</span>
     </form>
   </div>
 </section>
@@ -516,11 +572,10 @@ footer a{text-decoration:underline;text-underline-offset:3px}
 </main>
 
 <footer>
-  <span>© <span id="yr"></span> <span data-name>Nama Kamu</span> · Desainer Web</span>
-  <span>Lukisan: Botticelli, Vermeer, Raphael, Michelangelo, Friedrich, van Eyck, van Gogh — domain publik via <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a></span>
+  <span>© <span id="yr">2026</span> <span data-name>Nama Kamu</span> · Desainer Web</span>
+  <span>Setiap adegan dilukis langsung oleh browser dengan kode, terinspirasi lukisan Renaisans.</span>
 </footer>
 
-<!-- Floating WhatsApp button -->
 <a class="fab" data-wa="Halo! Saya tertarik bikin website." target="_blank" rel="noopener" aria-label="Chat WhatsApp">
   <span class="tip">Konsultasi gratis 👋</span>
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg>
@@ -540,82 +595,430 @@ const CONFIG = {
   whatsapp: "6281234567890",
 };
 
+/* ---------------- Painted scenes (canvas) ---------------- */
+const Paint = (() => {
+  const TAU = Math.PI * 2;
+  const rng = (s) => () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  const hx = (h) => { h = h.replace("#", ""); return [0, 2, 4].map(i => parseInt(h.slice(i, i + 2), 16)); };
+  const rgba = (h, a) => { const [r, g, b] = hx(h); return `rgba(${r},${g},${b},${a})`; };
+  const mix = (a, b, t) => "#" + hx(a).map((v, i) => Math.round(v + (hx(b)[i] - v) * t).toString(16).padStart(2, "0")).join("");
+  const pick = (r, arr) => arr[(r() * arr.length) | 0];
+
+  function make(canvas, W, H, seed) {
+    canvas.width = W; canvas.height = H;
+    return { c: canvas, ctx: canvas.getContext("2d"), W, H, r: rng(seed), U: Math.min(W, H) / 1000 };
+  }
+  function lin(ctx, x0, y0, x1, y1, stops) { const g = ctx.createLinearGradient(x0, y0, x1, y1); stops.forEach(([o, c]) => g.addColorStop(o, c)); return g; }
+  function glow(ctx, x, y, rad, col, a = 1) {
+    const g = ctx.createRadialGradient(x, y, 0, x, y, rad);
+    g.addColorStop(0, rgba(col, a)); g.addColorStop(1, rgba(col, 0));
+    ctx.fillStyle = g; ctx.fillRect(x - rad, y - rad, rad * 2, rad * 2);
+  }
+
+  function cloud(p, x, y, w, h, light, shade) {
+    const { ctx, r } = p, n = 14 + (r() * 10 | 0), puffs = [];
+    for (let i = 0; i < n; i++) {
+      const t = r(), bump = Math.sin(t * Math.PI);
+      puffs.push([x + (t - .5) * w, y - bump * h * .35 * r(), h * (.22 + .42 * bump) * (.7 + r() * .6)]);
+    }
+    puffs.forEach(([px, py, rad]) => glow(ctx, px, py + rad * .4, rad * 1.2, shade, .45));
+    puffs.forEach(([px, py, rad]) => {
+      ctx.fillStyle = lin(ctx, px, py - rad, px, py + rad, [[0, light], [.5, light], [1, shade]]);
+      ctx.beginPath(); ctx.arc(px, py, rad, 0, TAU); ctx.fill();
+    });
+    puffs.forEach(([px, py, rad]) => glow(ctx, px - rad * .3, py - rad * .45, rad * .6, "#ffffff", .35));
+  }
+  function ridge(p, y, amp, c1, c2, f = 1) {
+    const { ctx, W, H, r } = p, ph = [r() * 9, r() * 9, r() * 9];
+    ctx.beginPath(); ctx.moveTo(0, H);
+    for (let x = 0; x <= W + 8; x += 8) {
+      const t = x / W * f;
+      ctx.lineTo(x, y - amp * (.5 * Math.sin(t * 3 + ph[0]) + .3 * Math.sin(t * 7 + ph[1]) + .2 * Math.sin(t * 17 + ph[2])));
+    }
+    ctx.lineTo(W, H); ctx.closePath();
+    ctx.fillStyle = lin(ctx, 0, y - amp, 0, H, [[0, c1], [1, c2]]); ctx.fill();
+  }
+  function cypress(p, x, base, h, dark = "#142015", mid = "#2f4528") {
+    const { ctx, r } = p, w = h * .13;
+    ctx.beginPath(); ctx.moveTo(x, base - h);
+    ctx.bezierCurveTo(x + w * .9, base - h * .7, x + w * .7, base - h * .15, x + w * .2, base);
+    ctx.lineTo(x - w * .2, base);
+    ctx.bezierCurveTo(x - w * .7, base - h * .15, x - w * .9, base - h * .7, x, base - h);
+    ctx.fillStyle = lin(ctx, x - w, 0, x + w, 0, [[0, dark], [.4, mid], [1, dark]]); ctx.fill();
+    ctx.lineCap = "round";
+    for (let i = 0; i < h / 5; i++) {
+      const t = r(), yy = base - h * t, ww = w * Math.sin(Math.min(1, (1 - t) * 1.25) * Math.PI * .5) * .7;
+      ctx.strokeStyle = rgba(mix(mid, "#8a9a5a", r() * .5), .35); ctx.lineWidth = 1 + r() * 2.5;
+      ctx.beginPath(); ctx.arc(x + (r() - .5) * ww, yy, ww * .4, Math.PI * 1.1, Math.PI * 1.9); ctx.stroke();
+    }
+  }
+  function pine(p, x, base, h) {
+    const { ctx, r } = p, tx = x + (r() - .5) * h * .3, ty = base - h * .78;
+    ctx.strokeStyle = "#3a2a1e"; ctx.lineCap = "round"; ctx.lineWidth = h * .028;
+    ctx.beginPath(); ctx.moveTo(x, base); ctx.quadraticCurveTo(x + (r() - .5) * h * .2, base - h * .4, tx, ty); ctx.stroke();
+    ctx.lineWidth = h * .014;
+    for (let k = 0; k < 4; k++) { ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(tx + (r() - .5) * h * .5, ty - h * (.04 + r() * .1)); ctx.stroke(); }
+    const cw = h * (.5 + r() * .2);
+    for (let i = 0; i < 9; i++) {
+      const ex = tx + (r() - .5) * cw, ey = ty - h * .1 + (r() - .5) * h * .07, rx = cw * (.16 + r() * .14), ry = rx * .36;
+      ctx.fillStyle = "#1e2c1d"; ctx.beginPath(); ctx.ellipse(ex, ey, rx, ry, 0, 0, TAU); ctx.fill();
+      ctx.fillStyle = rgba("#5f7444", .8); ctx.beginPath(); ctx.ellipse(ex - rx * .1, ey - ry * .35, rx * .75, ry * .5, 0, 0, TAU); ctx.fill();
+    }
+  }
+  function bushes(p, y0, cols) {
+    const { ctx, W, H, r, U } = p;
+    for (let i = 0; i < W / (22 * U * 1.6) ; i++) {
+      const x = r() * W, y = y0 + r() * (H - y0) * 1.1, rad = U * (30 + r() * 70);
+      ctx.fillStyle = mix(cols[0], cols[1], r() * .5); ctx.beginPath(); ctx.arc(x, y, rad, 0, TAU); ctx.fill();
+      ctx.fillStyle = rgba(cols[2], .55); ctx.beginPath(); ctx.arc(x - rad * .2, y - rad * .35, rad * .55, 0, TAU); ctx.fill();
+    }
+  }
+  function bird(ctx, x, y, s, col = "#ffffff") {
+    ctx.fillStyle = col; ctx.beginPath(); ctx.moveTo(x - s, y);
+    ctx.quadraticCurveTo(x - s * .5, y - s * .7, x, y); ctx.quadraticCurveTo(x + s * .5, y - s * .7, x + s, y);
+    ctx.quadraticCurveTo(x + s * .35, y - s * .1, x, y + s * .3); ctx.quadraticCurveTo(x - s * .35, y - s * .1, x - s, y); ctx.fill();
+  }
+
+  /* -- finishing: brush strokes, grain, varnish, vignette -- */
+  let grainCanvas;
+  function finish(p, o = {}) {
+    const { ctx, W, H, r, U } = p;
+    if (o.strokes !== 0) {
+      const d = ctx.getImageData(0, 0, W, H).data, n = (W * H / 210 * (o.strokes || 1)) | 0;
+      ctx.lineCap = "round";
+      for (let i = 0; i < n; i++) {
+        const x = r() * W, y = r() * H, j = ((y | 0) * W + (x | 0)) * 4, v = (r() - .5) * 26;
+        ctx.strokeStyle = `rgba(${d[j] + v | 0},${d[j + 1] + v | 0},${d[j + 2] + v | 0},.5)`;
+        ctx.lineWidth = U * (2 + r() * 5);
+        const a = (r() - .5) * 1.1 + (y > H * .65 ? .25 : 0), l = U * (8 + r() * 18);
+        ctx.beginPath(); ctx.moveTo(x - Math.cos(a) * l, y - Math.sin(a) * l);
+        ctx.quadraticCurveTo(x + r() * 4 - 2, y + r() * 4 - 2, x + Math.cos(a) * l, y + Math.sin(a) * l); ctx.stroke();
+      }
+    }
+    if (!grainCanvas) {
+      grainCanvas = document.createElement("canvas"); grainCanvas.width = grainCanvas.height = 180;
+      const g = grainCanvas.getContext("2d"), id = g.createImageData(180, 180);
+      for (let i = 0; i < id.data.length; i += 4) { const v = Math.random() * 255; id.data[i] = id.data[i + 1] = id.data[i + 2] = v; id.data[i + 3] = 255; }
+      g.putImageData(id, 0, 0);
+    }
+    ctx.save();
+    ctx.globalAlpha = .07; ctx.globalCompositeOperation = "overlay";
+    ctx.fillStyle = ctx.createPattern(grainCanvas, "repeat"); ctx.fillRect(0, 0, W, H);
+    if (o.varnish !== 0) { ctx.globalAlpha = .22; ctx.globalCompositeOperation = "soft-light"; ctx.fillStyle = "#c08a4a"; ctx.fillRect(0, 0, W, H); }
+    ctx.restore();
+    const vg = ctx.createRadialGradient(W / 2, H * .45, Math.min(W, H) * .35, W / 2, H * .5, Math.hypot(W, H) * .62);
+    vg.addColorStop(0, "rgba(14,9,5,0)"); vg.addColorStop(1, "rgba(14,9,5,.55)");
+    ctx.fillStyle = vg; ctx.fillRect(0, 0, W, H);
+  }
+
+  /* -- scene: landscape (sky, clouds, mountains, trees) -- */
+  function landscape(p, o) {
+    const { ctx, W, H, r, U } = p, hz = H * (o.horizon || .7);
+    ctx.fillStyle = lin(ctx, 0, 0, 0, hz, [[0, o.sky[0]], [.6, o.sky[1]], [1, o.sky[2]]]); ctx.fillRect(0, 0, W, H);
+    if (o.sun) { glow(ctx, o.sun[0] * W, o.sun[1] * H, Math.max(W, H) * .5, o.sun[2], .75); glow(ctx, o.sun[0] * W, o.sun[1] * H, Math.max(W, H) * .07, "#fff4d6", .95); }
+    for (let i = 0; i < (o.clouds || 0); i++) cloud(p, r() * W, H * (.06 + r() * .42), W * (.16 + r() * .26) + 200 * U, H * (.1 + r() * .1) + 60 * U, o.cloud[0], o.cloud[1]);
+    (o.mountains || []).forEach((c, i, a) => ridge(p, hz - H * (.03 + (a.length - i) * .045), H * (.05 + i * .01), c, mix(c, o.ground[0], .4), 1.3 + i * .4));
+    ridge(p, hz, H * .025, o.ground[0], o.ground[1], 2);
+    (o.cypress || []).forEach(([fx, fh]) => cypress(p, fx * W, hz + H * .03, fh * H, o.treeDark, o.treeMid));
+    (o.pines || []).forEach(([fx, fh]) => pine(p, fx * W, hz + H * .04, fh * H));
+    bushes(p, H * .86, [o.ground[1], o.ground[0], o.bushLight || "#6f7f48"]);
+  }
+
+  /* -- scene: night sky (nebula, stars, swirl, armillary, hills) -- */
+  function cosmos(p, o) {
+    const { ctx, W, H, r, U } = p;
+    ctx.fillStyle = lin(ctx, 0, 0, 0, H, [[0, o.bg[0]], [.6, o.bg[1]], [1, o.bg[2]]]); ctx.fillRect(0, 0, W, H);
+    ctx.save(); ctx.globalCompositeOperation = "lighter";
+    for (let i = 0; i < 34; i++) glow(ctx, r() * W, r() * H * .85, Math.max(W, H) * (.06 + r() * .26), pick(r, o.neb), .05 + r() * .1);
+    ctx.restore();
+    if (o.swirl) {
+      ctx.lineCap = "round";
+      for (let b = 0; b < 26; b++) {           // flowing wind bands
+        const y0 = H * (.2 + r() * .35), amp = H * (.03 + r() * .05), ph = r() * TAU;
+        ctx.strokeStyle = rgba(pick(r, ["#9fc4ff", "#cfe1ff", "#6f93e8", "#f2e6a8"]), .22 + r() * .25); ctx.lineWidth = U * (4 + r() * 8);
+        ctx.beginPath();
+        for (let x = -20; x <= W + 20; x += 14) ctx.lineTo(x, y0 + Math.sin(x / W * 5 + ph) * amp);
+        ctx.stroke();
+      }
+      o.swirl.forEach(([fx, fy, fr]) => {      // spiral eddies
+        const cx = fx * W, cy = fy * H, R = fr * Math.min(W, H);
+        for (let k = 1; k < 16; k++) {
+          const rad = R * k / 16, a0 = r() * TAU;
+          ctx.strokeStyle = rgba(pick(r, ["#cfe1ff", "#8fb2f5", "#f4e7a6", "#ffffff"]), .3 + r() * .35); ctx.lineWidth = U * (3 + r() * 6);
+          ctx.beginPath(); ctx.arc(cx + k * U * 2, cy - k * U, rad, a0, a0 + Math.PI * (1.1 + r() * 1.2)); ctx.stroke();
+        }
+      });
+    }
+    for (let i = 0; i < W * H / 2600; i++) { ctx.fillStyle = `rgba(255,255,255,${r() * .8})`; ctx.fillRect(r() * W, r() * H * .8, U * (1 + r() * 2.2), U * (1 + r() * 2.2)); }
+    for (let i = 0; i < (o.bright || 14); i++) {
+      const x = r() * W, y = r() * H * .7, s = U * (6 + r() * 14);
+      glow(ctx, x, y, s * 5, o.starGlow || "#bcd2ff", .45);
+      if (o.swirl) { for (let k = 1; k < 4; k++) { ctx.strokeStyle = rgba("#f6e58f", .5 / k); ctx.lineWidth = U * 4; ctx.beginPath(); ctx.arc(x, y, s * k * .9, 0, TAU); ctx.stroke(); } }
+      ctx.fillStyle = "#fffbe8"; ctx.beginPath();
+      ctx.moveTo(x, y - s * 2); ctx.quadraticCurveTo(x, y, x + s * 2, y); ctx.quadraticCurveTo(x, y, x, y + s * 2); ctx.quadraticCurveTo(x, y, x - s * 2, y); ctx.quadraticCurveTo(x, y, x, y - s * 2); ctx.fill();
+    }
+    if (o.moon) {
+      const [fx, fy] = o.moon, x = fx * W, y = fy * H, R = U * 55;
+      glow(ctx, x, y, R * 4, "#f6d95a", .55);
+      ctx.fillStyle = "#f8e27a"; ctx.beginPath(); ctx.arc(x, y, R, 0, TAU); ctx.fill();
+      ctx.fillStyle = o.bg[0]; ctx.beginPath(); ctx.arc(x + R * .45, y - R * .2, R * .85, 0, TAU); ctx.fill();
+    }
+    if (o.armillary) {
+      const [fx, fy, fr] = o.armillary, x = fx * W, y = fy * H, R = fr * Math.min(W, H);
+      glow(ctx, x, y, R * 1.6, "#e9c46a", .18);
+      ctx.strokeStyle = "#d8b25c"; ctx.lineWidth = U * 7;
+      ctx.beginPath(); ctx.arc(x, y, R, 0, TAU); ctx.stroke();
+      [0, .55, 1.15, 1.85, 2.5].forEach((a, i) => { ctx.lineWidth = U * (i % 2 ? 4 : 6); ctx.strokeStyle = i % 2 ? "#f1d58c" : "#b88d3e"; ctx.beginPath(); ctx.ellipse(x, y, R, R * .32, a, 0, TAU); ctx.stroke(); });
+      ctx.fillStyle = lin(ctx, x - R * .2, y - R * .2, x + R * .2, y + R * .2, [[0, "#ffe9a8"], [1, "#9a6a24"]]);
+      ctx.beginPath(); ctx.arc(x, y, R * .16, 0, TAU); ctx.fill();
+      ctx.strokeStyle = "#8a6428"; ctx.lineWidth = U * 10; ctx.beginPath(); ctx.moveTo(x, y + R); ctx.lineTo(x, y + R * 1.6); ctx.stroke();
+      ctx.fillStyle = "#6b4c1e"; ctx.fillRect(x - R * .45, y + R * 1.6, R * .9, U * 18);
+    }
+    if (o.hills) {
+      ridge(p, H * .8, H * .05, "#1c2d5a", "#0a1230", 1.5);
+      for (let i = 0; i < 60; i++) { const x = r() * W, y = H * (.84 + r() * .12); ctx.fillStyle = rgba("#ffd27a", .5 + r() * .5); ctx.fillRect(x, y, U * 6, U * 5); }
+      ridge(p, H * .93, H * .03, "#0f1a3a", "#060b1e", 3);
+      cypress(p, W * .14, H * 1.02, H * .78, "#07100c", "#1d3324");
+    }
+  }
+
+  /* -- scene: interior study (arched window, books, desk) -- */
+  function archPath(ctx, x, y, w, h) {
+    ctx.beginPath(); ctx.moveTo(x, y + h); ctx.lineTo(x, y + w / 2); ctx.arc(x + w / 2, y + w / 2, w / 2, Math.PI, 0); ctx.lineTo(x + w, y + h); ctx.closePath();
+  }
+  function interior(p, o) {
+    const { ctx, W, H, r, U } = p, left = o.win === "left";
+    ctx.fillStyle = lin(ctx, 0, 0, 0, H, [[0, o.wall[0]], [1, o.wall[1]]]); ctx.fillRect(0, 0, W, H);
+    for (let i = 0; i < 9; i++) { ctx.fillStyle = rgba("#000000", .05 + r() * .06); ctx.fillRect(r() * W, 0, U * (40 + r() * 120), H); }
+    const ww = Math.max(W * .24, H * .22), wh = H * .56, wx = left ? W * .09 : W - W * .09 - ww, wy = H * .12;
+    ctx.save(); archPath(ctx, wx, wy, ww, wh); ctx.clip();
+    ctx.fillStyle = lin(ctx, 0, wy, 0, wy + wh, [[0, o.sky[0]], [1, o.sky[1]]]); ctx.fillRect(wx, wy, ww, wh);
+    cloud(p, wx + ww * .4, wy + wh * .3, ww * .7, wh * .12, "#fbf3e2", "#b8b0a2");
+    ridge(p, wy + wh * .78, wh * .05, "#7f8b74", "#4d5a44", 3);
+    cypress(p, wx + ww * .7, wy + wh * .95, wh * .4);
+    ctx.restore();
+    glow(ctx, wx + ww / 2, wy + wh * .6, Math.max(W, H) * .45, o.light, .22);
+    ctx.lineWidth = U * 24; ctx.strokeStyle = o.stone; archPath(ctx, wx, wy, ww, wh); ctx.stroke();
+    ctx.lineWidth = U * 6; ctx.strokeStyle = "rgba(0,0,0,.35)"; archPath(ctx, wx + U * 14, wy + U * 14, ww - U * 28, wh - U * 14); ctx.stroke();
+    ctx.fillStyle = o.stone; ctx.fillRect(wx + ww / 2 - U * 5, wy + ww / 2, U * 10, wh - ww / 2);
+    const sw = W * .4, sx = left ? W - sw - W * .05 : W * .05, sy = H * .07, rows = 5, rh = H * .145;
+    ctx.fillStyle = "#24170e"; ctx.fillRect(sx - U * 22, sy - U * 22, sw + U * 44, rows * rh + U * 44);
+    for (let row = 0; row < rows; row++) {
+      const y = sy + row * rh; let x = sx;
+      while (x < sx + sw - U * 10) {
+        const bw = U * (14 + r() * 24), bh = rh * (.6 + r() * .32);
+        ctx.fillStyle = pick(r, o.books); ctx.fillRect(x, y + rh - bh, bw - U * 2, bh);
+        ctx.fillStyle = rgba("#e3bd72", .55); ctx.fillRect(x, y + rh - bh * .85, bw - U * 2, U * 3); ctx.fillRect(x, y + rh - bh * .2, bw - U * 2, U * 3);
+        x += bw + (r() < .08 ? U * 30 : 0);
+      }
+      ctx.fillStyle = "#3b2818"; ctx.fillRect(sx - U * 12, y + rh, sw + U * 24, U * 12);
+    }
+    ctx.fillStyle = lin(ctx, 0, H * .78, 0, H, [[0, "#2a1c12"], [1, "#100a06"]]); ctx.fillRect(0, H * .78, W, H * .22);
+    const dx = W * .3, dy = H * .74, dw = W * .4;
+    ctx.fillStyle = "#3a2414"; ctx.fillRect(dx, dy, dw, H * .035); ctx.fillRect(dx + U * 20, dy, U * 22, H * .26); ctx.fillRect(dx + dw - U * 42, dy, U * 22, H * .26);
+    ctx.fillStyle = "#efe4cc";
+    ctx.beginPath(); ctx.moveTo(dx + dw * .3, dy); ctx.lineTo(dx + dw * .5, dy - U * 10); ctx.lineTo(dx + dw * .5, dy - U * 4); ctx.lineTo(dx + dw * .32, dy + U * 6); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(dx + dw * .7, dy); ctx.lineTo(dx + dw * .5, dy - U * 10); ctx.lineTo(dx + dw * .5, dy - U * 4); ctx.lineTo(dx + dw * .68, dy + U * 6); ctx.fill();
+    glow(ctx, dx + dw * .82, dy - U * 40, Math.min(W, H) * .25, "#ffb35a", .35);
+    ctx.fillStyle = "#f3e3c0"; ctx.fillRect(dx + dw * .82 - U * 6, dy - U * 46, U * 12, U * 46);
+    glow(ctx, dx + dw * .82, dy - U * 56, U * 18, "#fff1c4", 1);
+    const cx = left ? 0 : W - W * .08, cw = W * .08;
+    for (let i = 0; i < 8; i++) { ctx.fillStyle = lin(ctx, cx + cw * i / 8, 0, cx + cw * (i + 1) / 8, 0, [[0, o.curtain[0]], [.5, o.curtain[1]], [1, o.curtain[0]]]); ctx.fillRect(cx + cw * i / 8, 0, cw / 8 + 1, H); }
+  }
+
+  /* -- scene: marble loggia in one-point perspective -- */
+  function arcade(p, o) {
+    const { ctx, W, H, r, U } = p, vx = W / 2, vy = H * .56;
+    ctx.fillStyle = lin(ctx, 0, 0, 0, vy, [[0, o.sky[0]], [1, o.sky[1]]]); ctx.fillRect(0, 0, W, H);
+    for (let i = 0; i < 6; i++) cloud(p, vx + (r() - .5) * W * .9, vy - H * (.08 + r() * .3), W * .14 + 140 * U, H * .07 + 40 * U, "#fbf7ef", "#b9c2cf");
+    ridge(p, vy, H * .02, "#8d9a7c", "#6f7d5f", 3);
+    for (let z = 1; z < 46; z++) {
+      const ya = vy + (H - vy) / z, yb = vy + (H - vy) / (z + 1), ta = 1 / z, tb = 1 / (z + 1), cw = W * .16;
+      for (let k = -14; k < 14; k++) {
+        ctx.fillStyle = (k + z) % 2 ? o.floor[0] : o.floor[1];
+        ctx.beginPath(); ctx.moveTo(vx + k * cw * ta, ya); ctx.lineTo(vx + (k + 1) * cw * ta, ya); ctx.lineTo(vx + (k + 1) * cw * tb, yb); ctx.lineTo(vx + k * cw * tb, yb); ctx.fill();
+      }
+    }
+    ctx.fillStyle = lin(ctx, 0, vy, 0, H, [[0, "rgba(255,248,235,.35)"], [1, "rgba(0,0,0,0)"]]); ctx.fillRect(0, vy, W, H - vy);
+    const N = 6;
+    for (let d = N - 1; d >= 0; d--) {
+      const s = 1 / (1 + d * .62), hw = Math.max(W * .44, H * .5) * s, top = vy - H * .5 * s, bot = vy + (H - vy) * s * .985, colW = Math.max(W, H) * .05 * s;
+      const haze = d / N, stone = mix(o.stone[0], "#e9e4dc", haze * .6), shade = mix(o.stone[1], "#cfc8bc", haze * .6);
+      const rx = hw, ry = hw * .48, band = H * .14 * s, yTop = d === 0 ? -10 : top - ry - band;
+      ctx.beginPath(); ctx.rect(vx - hw - colW, yTop, (hw + colW) * 2, top - yTop);
+      ctx.moveTo(vx + rx, top); ctx.ellipse(vx, top, rx, ry, 0, 0, Math.PI, true); ctx.closePath();
+      ctx.fillStyle = lin(ctx, 0, yTop, 0, top, [[0, shade], [1, stone]]); ctx.fill("evenodd");
+      if (d === 0) { ctx.fillStyle = shade; ctx.fillRect(-10, -10, vx - hw - colW + 10, H + 20); ctx.fillRect(vx + hw + colW, -10, W, H + 20); }
+      ctx.strokeStyle = rgba("#fff8ea", .5); ctx.lineWidth = colW * .3; ctx.beginPath(); ctx.ellipse(vx, top, rx, ry, 0, Math.PI, 0); ctx.stroke();
+      [-1, 1].forEach(side => {
+        const x = vx + side * hw;
+        ctx.fillStyle = lin(ctx, x - colW / 2, 0, x + colW / 2, 0, [[0, mix(stone, "#ffffff", .3)], [.45, stone], [1, mix(shade, "#000000", .25)]]);
+        ctx.fillRect(x - colW / 2, top, colW, bot - top);
+        ctx.fillStyle = stone; ctx.fillRect(x - colW * .8, top - colW * .35, colW * 1.6, colW * .35); ctx.fillRect(x - colW * .75, bot - colW * .3, colW * 1.5, colW * .3);
+        ctx.fillStyle = rgba("#000000", .12); for (let f = 1; f < 4; f++) ctx.fillRect(x - colW / 2 + colW * f / 4, top, U * 2 * s + 1, bot - top);
+      });
+    }
+  }
+
+  /* -- scene: coffered dome with oculus -- */
+  function dome(p, o) {
+    const { ctx, W, H, r, U } = p, cx = W / 2, cy = H * .48, r0 = Math.min(W, H) * .2, R = Math.hypot(W, H) * .62;
+    const bg = ctx.createRadialGradient(cx, cy, r0, cx, cy, R);
+    bg.addColorStop(0, "#efe2c6"); bg.addColorStop(.45, "#a8916f"); bg.addColorStop(1, "#3b2f24");
+    ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+    const n = 26, da = TAU / n; let ra = R, ring = 0;
+    while (ra > r0 * 1.08) {
+      const rb = Math.max(r0 * 1.04, ra * .8), off = ring % 2 ? da / 2 : 0;
+      for (let i = 0; i < n; i++) {
+        const a0 = i * da + off, a1 = a0 + da, aa0 = a0 + da * .13, aa1 = a1 - da * .13, q0 = rb + (ra - rb) * .14, q1 = ra - (ra - rb) * .14;
+        ctx.beginPath(); ctx.arc(cx, cy, q1, aa0, aa1); ctx.arc(cx, cy, q0, aa1, aa0, true); ctx.closePath();
+        const g = ctx.createRadialGradient(cx, cy, q0, cx, cy, q1);
+        g.addColorStop(0, "rgba(40,28,18,.15)"); g.addColorStop(1, "rgba(40,28,18,.65)");
+        ctx.fillStyle = g; ctx.fill();
+        ctx.strokeStyle = "rgba(255,245,225,.25)"; ctx.lineWidth = U * 2; ctx.stroke();
+        const am = (a0 + a1) / 2, rm = (q0 + q1) / 2;
+        glow(ctx, cx + Math.cos(am) * rm, cy + Math.sin(am) * rm, (ra - rb) * .16, "#e8c06a", .9);
+      }
+      ctx.strokeStyle = "rgba(60,40,22,.5)"; ctx.lineWidth = U * 3; ctx.beginPath(); ctx.arc(cx, cy, rb, 0, TAU); ctx.stroke();
+      ra = rb; ring++;
+    }
+    ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r0, 0, TAU); ctx.clip();
+    ctx.fillStyle = lin(ctx, 0, cy - r0, 0, cy + r0, [[0, o.sky[0]], [1, o.sky[1]]]); ctx.fillRect(cx - r0, cy - r0, r0 * 2, r0 * 2);
+    for (let i = 0; i < 4; i++) cloud(p, cx + (r() - .5) * r0 * 1.6, cy + (r() - .3) * r0 * 1.2, r0 * .9, r0 * .3, "#ffffff", "#b6c4d8");
+    for (let i = 0; i < 7; i++) bird(ctx, cx + (r() - .5) * r0 * 1.4, cy + (r() - .5) * r0 * 1.2, U * (14 + r() * 18));
+    ctx.restore();
+    ctx.lineWidth = U * 16; ctx.strokeStyle = "#b8914a"; ctx.beginPath(); ctx.arc(cx, cy, r0, 0, TAU); ctx.stroke();
+    ctx.lineWidth = U * 5; ctx.strokeStyle = "#5c4220"; ctx.beginPath(); ctx.arc(cx, cy, r0 + U * 11, 0, TAU); ctx.stroke();
+    glow(ctx, cx, cy, r0 * 2.6, "#fff3d6", .18);
+  }
+
+  /* -- scene: engraving (line-screen of a landscape) -- */
+  function engraving(p, o) {
+    const { ctx, W, H, U } = p;
+    const off = make(document.createElement("canvas"), W, H, 99);
+    landscape(off, o.base);
+    const d = off.ctx.getImageData(0, 0, W, H).data, step = Math.max(3, Math.round(4 * U * 1.4));
+    ctx.fillStyle = "#0e0d0b"; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = "#efe8da";
+    for (let y = 0; y < H; y += step) {
+      for (let x = 0; x < W; x += 2) {
+        const j = ((y | 0) * W + x) * 4, lum = (d[j] * .3 + d[j + 1] * .59 + d[j + 2] * .11) / 255;
+        const w = Math.pow(lum, 1.3) * step * .95, wave = Math.sin(x * .018 + y * .07) * step * .25;
+        if (w > .25) ctx.fillRect(x, y - w / 2 + wave, 2, w);
+      }
+    }
+  }
+
+  const SCENES = {
+    hero: p => { landscape(p, { sky: ["#3f7fc0", "#8dbbdf", "#d9e6ea"], clouds: 8, cloud: ["#fdf8ee", "#9fb0c6"], horizon: .74,
+      ground: ["#5b6b3c", "#26301b"], treeDark: "#142015", treeMid: "#2f4528",
+      cypress: [[.58, .5], [.62, .38], [.88, .56], [.93, .44], [.08, .3]], pines: [[.2, .42], [.38, .3], [.75, .36]] }); finish(p); },
+    study: p => { interior(p, { win: "left", wall: ["#5a4330", "#2a1d13"], sky: ["#7fb0d8", "#e6dcc4"], stone: "#9a8466", light: "#ffe2a8",
+      books: ["#6b2a22", "#3d4a2c", "#8a6a34", "#2a3346", "#5a3a28", "#7b5a3a", "#3a2a40"], curtain: ["#4a1414", "#8a2a22"] }); finish(p); },
+    cosmos: p => { cosmos(p, { bg: ["#050a26", "#0f1b56", "#1d2f7a"], neb: ["#6a4cff", "#2f6bff", "#c04cff", "#1fb6ff"], bright: 18, armillary: [.27, .5, .2] }); finish(p, { varnish: 0 }); },
+    arcade: p => { arcade(p, { sky: ["#6fa3d6", "#e4ecee"], floor: ["#e8dcc6", "#b5806e"], stone: ["#e2d6bf", "#a8977c"] }); finish(p, { strokes: .7 }); },
+    dome: p => { dome(p, { sky: ["#4a8fd6", "#cfe4f6"] }); finish(p, { strokes: .7 }); },
+    engraving: p => { engraving(p, { base: { sky: ["#7a9ac0", "#c8d8e8", "#eef2f2"], clouds: 7, cloud: ["#ffffff", "#7b8796"], horizon: .7,
+      ground: ["#4a5a33", "#10140c"], treeDark: "#0a0f0a", treeMid: "#3a4d30", mountains: ["#9aa5b5"],
+      cypress: [[.7, .52], [.75, .4], [.2, .46]], pines: [[.4, .4], [.9, .32]] } }); finish(p, { strokes: 0, varnish: 0 }); },
+    golden: p => { landscape(p, { sky: ["#6f86ad", "#e6b77c", "#f7dcaa"], sun: [.72, .6, "#ffc979"], clouds: 5, cloud: ["#ffe6c2", "#b4807a"], horizon: .7,
+      mountains: ["#a7a6b8", "#8a8aa0", "#6b7086"], ground: ["#6b6a36", "#2d2e18"], bushLight: "#a08a48", treeDark: "#1a2414", treeMid: "#3b4a2a",
+      cypress: [[.12, .44], [.16, .34], [.84, .4]], pines: [[.32, .3], [.6, .26]] }); finish(p); },
+    dusk: p => { landscape(p, { sky: ["#1c2748", "#7a5a7c", "#e8a47c"], sun: [.3, .7, "#ff9a66"], clouds: 4, cloud: ["#f3b9a2", "#4f4366"], horizon: .72,
+      mountains: ["#4b4a6a", "#36364f"], ground: ["#2d3524", "#10140d"], bushLight: "#4f5a3a", treeDark: "#0b120b", treeMid: "#222f1f",
+      cypress: [[.5, .62], [.55, .5], [.62, .44], [.86, .58], [.08, .5]], pines: [[.28, .34]] }); finish(p); },
+    velvet: p => { interior(p, { win: "right", wall: ["#24352a", "#0f1812"], sky: ["#1c2a55", "#5a5a86"], stone: "#7c7058", light: "#b8c8ff",
+      books: ["#5a1f1a", "#203a2a", "#6e5428", "#1e2840", "#4a2e22", "#2e2238"], curtain: ["#0f2a1a", "#2f5a3a"] }); finish(p); },
+    starry: p => { cosmos(p, { bg: ["#0a1648", "#1d3a8a", "#2a4f9a"], neb: ["#2f6bff", "#5a8cff", "#1a3aa0"], bright: 11, starGlow: "#f6e58f",
+      swirl: [[.45, .3, .2], [.72, .22, .12]], moon: [.86, .14], hills: true }); finish(p, { varnish: 0 }); },
+  };
+
+  return function render(canvas, name, seed) {
+    const vw = Math.max(320, innerWidth), vh = Math.max(480, innerHeight), k = Math.min(devicePixelRatio || 1, 1.5);
+    const W = Math.round(Math.min(1600, vw * k * 1.1)), H = Math.round(W * vh / vw);
+    const p = make(canvas, W, H, seed);
+    SCENES[name](p);
+    canvas.classList.add("ready");
+  };
+})();
+
+/* ---------------- Page behaviour ---------------- */
 (() => {
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const waLink = (msg) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+  const n = CONFIG.whatsapp, pretty = `+${n.slice(0, 2)} ${n.slice(2, 5)}-${n.slice(5, 9)}-${n.slice(9)}`;
 
-  // Fill name + WhatsApp links
   $$("[data-name]").forEach(el => el.textContent = CONFIG.name);
   $$("[data-wa]").forEach(el => el.href = waLink(el.dataset.wa));
-  const n = CONFIG.whatsapp;
-  $$("[data-wa-display]").forEach(el => el.textContent = `+${n.slice(0, 2)} ${n.slice(2, 5)}-${n.slice(5, 9)}-${n.slice(9)}`);
+  $$("[data-wa-display]").forEach(el => el.textContent = pretty);
   document.getElementById("yr").textContent = new Date().getFullYear();
-  document.title = `${CONFIG.name} — Desainer Web`;
 
-  // Form → prefilled WhatsApp message
-  document.getElementById("waForm").addEventListener("submit", (e) => {
-    e.preventDefault();
-    const f = new FormData(e.target);
-    const msg = [
-      `Halo ${CONFIG.name}! Saya ${f.get("nama")}${f.get("bisnis") ? ` dari ${f.get("bisnis")}` : ""}.`,
-      `Kebutuhan: ${f.get("layanan")}`,
-      `Budget: ${f.get("budget")}`,
-      f.get("pesan") ? `Cerita singkat: ${f.get("pesan")}` : "",
-    ].filter(Boolean).join("\n");
-    window.open(waLink(msg), "_blank", "noopener");
+  // Form keeps a real link up to date, so tapping it opens WhatsApp with the message ready.
+  const form = document.getElementById("waForm"), send = document.getElementById("waSend");
+  const compose = () => {
+    const f = new FormData(form), nama = (f.get("nama") || "").trim(), bisnis = (f.get("bisnis") || "").trim(), pesan = (f.get("pesan") || "").trim();
+    send.href = waLink([
+      `Halo ${CONFIG.name}! Saya ${nama || "tertarik bikin website"}${bisnis ? ` dari ${bisnis}` : ""}.`,
+      `Kebutuhan: ${f.get("layanan")}`, `Budget: ${f.get("budget")}`, pesan ? `Cerita singkat: ${pesan}` : "",
+    ].filter(Boolean).join("\n"));
+  };
+  form.addEventListener("input", compose); form.addEventListener("change", compose);
+  form.addEventListener("submit", e => e.preventDefault());
+  compose();
+
+  const copyBtn = document.getElementById("copyNum");
+  copyBtn.addEventListener("click", () => {
+    const done = () => { copyBtn.textContent = "Tersalin ✓"; setTimeout(() => copyBtn.textContent = "Salin nomor", 1800); };
+    const fallback = () => { const s = getSelection(), rg = document.createRange(); rg.selectNodeContents(document.querySelector("[data-wa-display]")); s.removeAllRanges(); s.addRange(rg); };
+    try { navigator.clipboard.writeText("+" + n).then(done, fallback); } catch { fallback(); }
   });
 
-  // Split big titles into words for staggered reveal
+  // Split big titles into words for the staggered rise.
   $$(".split").forEach(h => {
-    const words = h.textContent.trim().split(/\s+/);
-    h.innerHTML = words.map((w, i) => `<span class="w"><span style="transition-delay:${i * 90}ms">${w}</span></span>`).join(" ");
+    h.innerHTML = h.textContent.trim().split(/\s+/).map((w, i) => `<span class="w"><span style="transition-delay:${i * 90}ms">${w}</span></span>`).join(" ");
   });
 
-  // Reveal on view
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
-  }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
-  $$(".rv, .split").forEach(el => io.observe(el));
+  // Reveal: only things below the first screen start hidden, so the page is complete at rest.
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce && "IntersectionObserver" in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove("pre"); io.unobserve(e.target); } }), { threshold: .12, rootMargin: "0px 0px -6% 0px" });
+    $$(".rv, .split").forEach(el => { if (el.getBoundingClientRect().top > innerHeight) { el.classList.add("pre"); io.observe(el); } });
+    const heroT = document.querySelector("#pembuka .split");
+    heroT.classList.add("pre"); requestAnimationFrame(() => requestAnimationFrame(() => heroT.classList.remove("pre")));
+  }
 
-  // Active chapter in the rail
-  const railLinks = $$(".rail a");
+  // Paint scenes: the first one now, the rest one at a time so scrolling stays smooth.
   const chapters = $$(".chapter");
-  const spy = new IntersectionObserver((entries) => {
-    entries.forEach(en => {
-      if (!en.isIntersecting) return;
-      railLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === `#${en.target.id}`));
-    });
-  }, { rootMargin: "-45% 0px -50% 0px" });
+  const queue = chapters.map((c, i) => [c.querySelector(".art"), c.dataset.scene, 1000 + i * 77]);
+  const next = () => { const job = queue.shift(); if (!job) return; try { Paint(...job); } catch (e) { console.error(e); } setTimeout(next, 30); };
+  next();
+
+  // Chapter index highlight.
+  const rail = $$(".rail a");
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) rail.forEach(a => a.classList.toggle("active", a.getAttribute("href") === `#${e.target.id}`));
+  }), { rootMargin: "-45% 0px -50% 0px" });
   chapters.forEach(c => spy.observe(c));
 
-  // Scroll-driven parallax: each chapter exposes --p (0 → 1) as it passes through the viewport
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const root = document.documentElement;
-  const topbar = document.querySelector(".topbar");
+  // Scroll-driven zoom/parallax: each chapter gets --p from 0 to 1 as it passes.
+  const root = document.documentElement, topbar = document.querySelector(".topbar");
   let ticking = false;
   const update = () => {
     const vh = innerHeight;
-    if (!reduce) {
-      chapters.forEach(c => {
-        const r = c.getBoundingClientRect();
-        if (r.bottom < -vh || r.top > vh * 2) return;
-        const p = Math.min(1, Math.max(0, (vh - r.top) / (r.height + vh)));
-        c.style.setProperty("--p", p.toFixed(4));
-      });
-    }
+    if (!reduce) chapters.forEach(c => {
+      const r = c.getBoundingClientRect();
+      if (r.bottom < -vh || r.top > vh * 2) return;
+      c.style.setProperty("--p", Math.min(1, Math.max(0, (vh - r.top) / (r.height + vh))).toFixed(4));
+    });
     const max = root.scrollHeight - vh;
     root.style.setProperty("--sp", max > 0 ? (scrollY / max).toFixed(4) : 0);
-    topbar.classList.toggle("scrolled", scrollY > vh * 0.6);
+    topbar.classList.toggle("scrolled", scrollY > vh * .6);
     ticking = false;
   };
   addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   addEventListener("resize", update);
   update();
 
-  // Hero title plays immediately on load
-  requestAnimationFrame(() => $$("#hero .split, #hero .rv").forEach(el => el.classList.add("in")));
-
-  // Nudge the floating WhatsApp tooltip once after a few seconds
   const fab = document.querySelector(".fab");
   setTimeout(() => { fab.classList.add("show-tip"); setTimeout(() => fab.classList.remove("show-tip"), 4000); }, 6000);
 })();

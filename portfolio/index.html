@@ -70,12 +70,12 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0}
 /* ---------- Chapters & scenes ---------- */
 .chapter{position:relative;--p:0}
 .stage{position:sticky;top:0;height:100vh;height:100lvh;overflow:hidden;margin-bottom:-100vh;margin-bottom:-100lvh;background:var(--base,#1c1a18)}
-.art{position:absolute;left:-5%;top:-5%;width:110%;height:110%;object-fit:cover;display:block;
+.art,.photo{position:absolute;left:-5%;top:-5%;width:110%;height:110%;object-fit:cover;display:block;
   transform:scale(calc(1.14 - var(--p) * .14)) translate3d(0,calc((var(--p) - .5) * -3%),0);will-change:transform;opacity:0;transition:opacity 1.2s var(--ease-premium)}
-.art.ready{opacity:1}
-.stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:
-  linear-gradient(180deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,0) 20%,rgba(0,0,0,0) 34%,rgba(0,0,0,.5) 62%,rgba(0,0,0,.78) 100%),
-  linear-gradient(90deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 55%)}
+.photo{object-position:var(--pos,center);z-index:1}
+.art.ready,.photo.ready{opacity:1}
+.stage::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:
+  linear-gradient(180deg,rgba(0,0,0,.34) 0%,rgba(0,0,0,0) 15%,rgba(0,0,0,0) 50%,rgba(0,0,0,.5) 100%)}
 .float{position:absolute;z-index:2;transform:translate3d(0,calc((.5 - var(--p)) * var(--speed,120) * 1px),0) rotate(var(--rot,0deg));will-change:transform}
 
 .cover{position:relative;z-index:3;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;gap:18px;
@@ -89,7 +89,7 @@ em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0}
 .mega .w{display:inline-block}
 .mega .w>span{display:inline-block;transition:transform 1s var(--ease),opacity .8s var(--ease-premium);transition-delay:inherit}
 .mega.pre .w>span{transform:translateY(55%);opacity:0}
-.lede{max-width:34em;font-size:clamp(17px,1.5vw,20px);color:rgba(255,255,255,.94);text-shadow:0 1px 2px rgba(0,0,0,.6),0 2px 22px rgba(0,0,0,.75);text-wrap:pretty}
+.lede{max-width:30em;font-family:var(--serif);font-size:clamp(21px,1.9vw,27px);line-height:1.22;color:rgba(255,255,255,.94);text-shadow:0 1px 2px rgba(0,0,0,.6),0 2px 22px rgba(0,0,0,.75);text-wrap:pretty}
 .cover.center .lede{margin-inline:auto}
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
 .cover.center .actions{justify-content:center}
@@ -256,7 +256,7 @@ footer{position:relative;z-index:3;background:var(--ink);border-top:1px solid va
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .art,.float{transform:none!important}
+  .art,.photo,.float{transform:none!important}
   .rv,.mega .w>span{transition:none}
   .rv.pre{opacity:1;transform:none}
   .mega.pre .w>span{transform:none;opacity:1}
@@ -295,7 +295,7 @@ footer{position:relative;z-index:3;background:var(--ink);border-top:1px solid va
 <main>
 
 <!-- PEMBUKA — sky, clouds, umbrella pines & cypress; shopping bags flying through the clouds -->
-<section class="chapter" id="pembuka" data-scene="hero" style="--base:#6f9fbf">
+<section class="chapter" id="pembuka" data-scene="hero" data-img="img/pembuka.jpg|https://commons.wikimedia.org/wiki/Special:FilePath/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg?width=2000" style="--base:#6f9fbf;--pos:50% 40%">
   <div class="stage">
     <canvas class="art" aria-hidden="true"></canvas>
     <div class="float" style="top:7%;left:50%;--speed:520;--rot:-14deg"><div class="bag">SALE</div></div>
@@ -324,7 +324,7 @@ footer{position:relative;z-index:3;background:var(--ink);border-top:1px solid va
 </section>
 
 <!-- TENTANG — a scholar's study: arched window, bookshelves, open manuscript -->
-<section class="chapter" id="tentang" data-scene="study" style="--base:#3a2a1c">
+<section class="chapter" id="tentang" data-scene="study" data-img="img/tentang.jpg|https://commons.wikimedia.org/wiki/Special:FilePath/Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg?width=2000" style="--base:#3a2a1c;--pos:50% 28%">
   <div class="stage">
     <canvas class="art" aria-hidden="true"></canvas>
     <div class="float hide-m" style="top:16%;left:40%;--speed:300;--rot:-3deg">
@@ -355,7 +355,7 @@ footer{position:relative;z-index:3;background:var(--ink);border-top:1px solid va
 </section>
 
 <!-- LANDING PAGE — night sky with an armillary sphere -->
-<section class="chapter" id="landing" data-scene="cosmos" style="--base:#0b1236">
+<section class="chapter" id="landing" data-scene="cosmos" data-img="img/landing.jpg|https://commons.wikimedia.org/wiki/Special:FilePath/Hans_Holbein_the_Younger_-_The_Ambassadors_-_Google_Art_Project.jpg?width=2000" style="--base:#0b1236;--pos:50% 30%">
   <div class="stage">
     <canvas class="art" aria-hidden="true"></canvas>
     <div class="float" style="top:20%;right:7%;--speed:320;--rot:-3deg">
@@ -373,7 +373,7 @@ footer{position:relative;z-index:3;background:var(--ink);border-top:1px solid va
 </section>
 
 <!-- COMPANY PROFILE — marble loggia in one-point perspective -->
-<section class="chapter" id="profil" data-scene="arcade" style="--base:#b9a888">
+<section class="chapter" id="profil" data-scene="arcade" data-img="img/profil.jpg|https://commons.wikimedia.org/wiki/Special:FilePath/%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg?width=2000" style="--base:#b9a888;--pos:50% 40%">
   <div class="stage">
     <canvas class="art" aria-hidden="true"></canvas>
     <div class="float" style="top:30%;left:50%;margin-left:-170px;--speed:260">
@@ -391,7 +391,7 @@ footer{position:relative;z-index:3;background:var(--ink);border-top:1px solid va
 </section>
 
 <!-- TOKO ONLINE — coffered dome with an open oculus and doves -->
-<section class="chapter" id="toko" data-scene="dome" style="--base:#6b5a44">
+<section class="chapter" id="toko" data-scene="dome" data-img="img/toko.jpg|https://commons.wikimedia.org/wiki/Special:FilePath/1665_Girl_with_a_Pearl_Earring.jpg?width=2000" style="--base:#6b5a44;--pos:40% 30%">
   <div class="stage">
     <canvas class="art" aria-hidden="true"></canvas>
     <div class="float" style="top:18%;right:12%;--speed:380;--rot:6deg">
@@ -410,7 +410,7 @@ footer{position:relative;z-index:3;background:var(--ink);border-top:1px solid va
 </section>
 
 <!-- REDESAIN — black & white engraving of a landscape -->
-<section class="chapter" id="redesain" data-scene="engraving" style="--base:#111110">
+<section class="chapter" id="redesain" data-scene="engraving" data-img="img/redesain.jpg|https://commons.wikimedia.org/wiki/Special:FilePath/Michelangelo_-_Creation_of_Adam_(cropped).jpg?width=2000" style="--base:#111110;--pos:50% 50%">
   <div class="stage">
     <canvas class="art" aria-hidden="true"></canvas>
     <div class="float" style="top:20%;right:6%;--speed:300;--rot:-2deg">
@@ -430,7 +430,7 @@ footer{position:relative;z-index:3;background:var(--ink);border-top:1px solid va
 </section>
 
 <!-- PROSES — golden-hour valley with distant mountains -->
-<section class="chapter" id="proses" data-scene="golden" style="--base:#c99a62">
+<section class="chapter" id="proses" data-scene="golden" data-img="img/proses.jpg|https://commons.wikimedia.org/wiki/Special:FilePath/Pieter_Bruegel_the_Elder_-_Hunters_in_the_Snow_(Winter)_-_Google_Art_Project.jpg?width=2000" style="--base:#c99a62;--pos:50% 50%">
   <div class="stage">
     <canvas class="art" aria-hidden="true"></canvas>
     <div class="float hide-m" style="top:15%;right:9%;--speed:340;--rot:2deg">
@@ -456,7 +456,7 @@ footer{position:relative;z-index:3;background:var(--ink);border-top:1px solid va
 </section>
 
 <!-- KARYA — dusk landscape with cypress -->
-<section class="chapter" id="karya" data-scene="dusk" style="--base:#4a3a52">
+<section class="chapter" id="karya" data-scene="dusk" data-img="img/karya.jpg|https://commons.wikimedia.org/wiki/Special:FilePath/Botticelli-primavera.jpg?width=2000" style="--base:#4a3a52;--pos:50% 40%">
   <div class="stage"><canvas class="art" aria-hidden="true"></canvas></div>
   <div class="cover">
     <p class="kicker rv">Konsep desain</p>
@@ -490,7 +490,7 @@ footer{position:relative;z-index:3;background:var(--ink);border-top:1px solid va
 </section>
 
 <!-- PAKET — velvet study at night -->
-<section class="chapter" id="paket" data-scene="velvet" style="--base:#1e2a1c">
+<section class="chapter" id="paket" data-scene="velvet" data-img="img/paket.jpg|https://commons.wikimedia.org/wiki/Special:FilePath/Van_Eyck_-_Arnolfini_Portrait.jpg?width=2000" style="--base:#1e2a1c;--pos:50% 32%">
   <div class="stage"><canvas class="art" aria-hidden="true"></canvas></div>
   <div class="cover">
     <p class="kicker rv">Investasi</p>
@@ -532,7 +532,7 @@ footer{position:relative;z-index:3;background:var(--ink);border-top:1px solid va
 </section>
 
 <!-- WHATSAPP — swirling starry night over sleeping hills (the centre of the site) -->
-<section class="chapter" id="whatsapp" data-scene="starry" style="--base:#0d1a4a">
+<section class="chapter" id="whatsapp" data-scene="starry" data-img="img/whatsapp.jpg|https://commons.wikimedia.org/wiki/Special:FilePath/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg?width=2000" style="--base:#0d1a4a;--pos:50% 40%">
   <div class="stage">
     <canvas class="art" aria-hidden="true"></canvas>
     <div class="float hide-m" style="top:60%;left:6%;--speed:280;--rot:-5deg">
@@ -573,7 +573,7 @@ footer{position:relative;z-index:3;background:var(--ink);border-top:1px solid va
 
 <footer>
   <span>© <span id="yr">2026</span> <span data-name>Nama Kamu</span> · Desainer Web</span>
-  <span>Setiap adegan dilukis langsung oleh browser dengan kode, terinspirasi lukisan Renaisans.</span>
+  <span>Lukisan: Botticelli, Leonardo, Holbein, Raphael, Vermeer, Michelangelo, Bruegel, van Eyck, van Gogh (domain publik, Wikimedia Commons).</span>
 </footer>
 
 <a class="fab" data-wa="Halo! Saya tertarik bikin website." target="_blank" rel="noopener" aria-label="Chat WhatsApp">
@@ -992,6 +992,18 @@ const Paint = (() => {
   const queue = chapters.map((c, i) => [c.querySelector(".art"), c.dataset.scene, 1000 + i * 77]);
   const next = () => { const job = queue.shift(); if (!job) return; try { Paint(...job); } catch (e) { console.error(e); } setTimeout(next, 30); };
   next();
+
+  // Real paintings: try a local copy (img/<bab>.jpg) first, then Wikimedia; the canvas painting stays as fallback.
+  chapters.forEach((c, idx) => {
+    const srcs = (c.dataset.img || "").split("|").filter(Boolean);
+    if (!srcs.length) return;
+    const img = new Image(); let i = 0;
+    img.className = "photo"; img.alt = ""; img.decoding = "async"; img.loading = idx < 2 ? "eager" : "lazy";
+    img.onload = () => img.classList.add("ready");
+    img.onerror = () => { if (++i < srcs.length) img.src = srcs[i]; else img.remove(); };
+    c.querySelector(".art").after(img);
+    img.src = srcs[0];
+  });
 
   // Chapter index highlight.
   const rail = $$(".rail a");

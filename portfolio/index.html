@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portofolio Desainer Web — Edisi Renaisans</title>
+<meta name="description" content="Desainer web freelance: landing page, company profile, dan toko online yang cantik, cepat, dan mendatangkan pelanggan. Konsultasi gratis via WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0b0b0d;
+  --paper:#f4efe6;
+  --white:#fff;
+  --muted:rgba(255,255,255,.68);
+  --line:rgba(255,255,255,.18);
+  --glass:rgba(18,18,22,.55);
+  --wa:#25d366;
+  --wa-dark:#128c4a;
+  --gold:#e8c27a;
+  --ease:cubic-bezier(.2,0,0,1);
+  --ease-premium:cubic-bezier(.4,0,.2,1);
+  --sans:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Instrument Serif",Georgia,serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--ink);color:var(--white);font-family:var(--sans);line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0}
+
+/* ---------- Top bar ---------- */
+.topbar{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:flex-start;justify-content:space-between;padding:18px 28px;pointer-events:none}
+.topbar>*{pointer-events:auto}
+.topbar::before{content:"";position:absolute;inset:0 0 -24px 0;z-index:-1;background:linear-gradient(180deg,rgba(8,8,10,.8),rgba(8,8,10,0));opacity:0;transition:opacity .4s var(--ease-premium);pointer-events:none}
+.topbar.scrolled::before{opacity:1}
+.brand{font-size:12px;line-height:1.15;font-weight:600;letter-spacing:.01em;text-shadow:0 1px 12px rgba(0,0,0,.5)}
+.brand b{display:block;font-size:14px;font-weight:700}
+.brand span{opacity:.75}
+.nav{display:flex;gap:4px;padding:4px;border-radius:999px;background:rgba(10,10,12,.35);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.nav a{font-size:13px;padding:7px 14px;border-radius:999px;transition:background .2s var(--ease)}
+.nav a:hover{background:rgba(255,255,255,.12)}
+.pill{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;padding:10px 18px;border-radius:999px;background:var(--white);color:var(--ink);transition:transform .15s var(--ease),box-shadow .2s var(--ease)}
+.pill:hover{transform:translateY(-1px);box-shadow:0 8px 30px rgba(0,0,0,.35)}
+.pill:active{transform:scale(.97)}
+.pill svg{width:18px;height:18px;flex:none}
+.pill.wa{background:var(--wa);color:#04210f}
+
+/* ---------- Chapter index (left rail, like the edition sidebar) ---------- */
+.rail{position:fixed;left:28px;bottom:28px;z-index:40;font-size:12px;line-height:1.55;list-style:none}
+.rail a{display:flex;gap:10px;align-items:center;opacity:.5;transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.rail a i{display:inline-block;width:0;height:1px;background:currentColor;transition:width .35s var(--ease)}
+.rail a.active{opacity:1}
+.rail a.active i{width:18px}
+.rail a:hover{opacity:.9}
+
+/* ---------- Chapters ---------- */
+.chapter{position:relative;--p:0}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;margin-bottom:-100vh;margin-bottom:-100svh;z-index:0}
+.bg{position:absolute;inset:-4%;background-color:var(--fallback,#2a2f45);background-image:var(--img),var(--grad,linear-gradient(160deg,#3b4a7a,#141826));background-size:cover;background-position:var(--pos,center);transform:scale(calc(1.16 - var(--p) * .16)) translateY(calc((var(--p) - .5) * -4%));will-change:transform;filter:saturate(1.08)}
+.stage::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 55%,rgba(0,0,0,.7) 100%),
+  radial-gradient(120% 90% at 50% 40%,transparent 50%,rgba(0,0,0,.45) 100%);
+  opacity:calc(.75 + var(--p) * .25)}
+.float{position:absolute;z-index:2;transform:translate3d(0,calc((.5 - var(--p)) * var(--speed,120) * 1px),0) rotate(var(--rot,0deg));will-change:transform}
+
+.cover{position:relative;z-index:3;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 28px 12vh 200px}
+.kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.mega{font-weight:700;font-size:clamp(64px,15vw,240px);line-height:.86;letter-spacing:-.055em}
+.mega.hero-t{font-size:clamp(52px,8.6vw,150px);max-width:12ch}
+.mega .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.16em;margin-bottom:-.12em}
+.mega .w>span{display:inline-block;transform:translateY(105%);transition:transform 1s var(--ease)}
+.in .mega .w>span,.mega.in .w>span{transform:none}
+.lede{max-width:560px;margin-top:22px;font-size:clamp(17px,1.6vw,21px);color:rgba(255,255,255,.88);text-shadow:0 1px 18px rgba(0,0,0,.5)}
+
+.content{position:relative;z-index:3;padding:10vh 28px 18vh 200px}
+.panel{background:var(--glass);backdrop-filter:blur(22px) saturate(1.2);-webkit-backdrop-filter:blur(22px) saturate(1.2);border:1px solid var(--line);border-radius:22px;padding:clamp(22px,3vw,40px)}
+h3.h{font-size:clamp(28px,3.6vw,52px);line-height:1.02;letter-spacing:-.03em;font-weight:600;max-width:18ch}
+.sub{color:var(--muted);max-width:60ch;margin-top:14px;font-size:17px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease-premium),transform .7s var(--ease-premium);transition-delay:calc(var(--i,0) * 80ms)}
+.rv.in{opacity:1;transform:none}
+
+/* ---------- Floating UI cards ---------- */
+.ui{background:rgba(255,255,255,.92);color:var(--ink);border-radius:16px;box-shadow:0 30px 60px -20px rgba(0,0,0,.55);font-size:13px;overflow:hidden}
+.ui.dark{background:rgba(16,16,20,.82);color:#fff;border:1px solid var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.chat{width:260px;padding:14px}
+.chat .who{display:flex;align-items:center;gap:10px;font-weight:600}
+.chat .av{width:30px;height:30px;border-radius:50%;background:var(--wa);display:grid;place-items:center;color:#fff}
+.chat .av svg{width:16px;height:16px}
+.bubble{margin-top:10px;background:#dcf8c6;color:#0b2a14;border-radius:12px 12px 12px 3px;padding:9px 11px;line-height:1.35}
+.bubble.me{background:#fff;border:1px solid #e5e5e5;border-radius:12px 12px 3px 12px;margin-left:30px}
+.meta{font-size:11px;opacity:.55;margin-top:4px;text-align:right}
+.score{width:190px;padding:16px;display:flex;align-items:center;gap:14px}
+.ring{--v:98;width:58px;height:58px;border-radius:50%;background:conic-gradient(var(--wa) calc(var(--v) * 1%),rgba(0,0,0,.08) 0);display:grid;place-items:center;flex:none}
+.ring b{width:46px;height:46px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:16px;color:var(--wa-dark)}
+.score small{display:block;opacity:.6}
+.browser{width:340px}
+.browser .bar{display:flex;gap:6px;align-items:center;padding:9px 12px;background:#efefef}
+.browser .bar i{width:9px;height:9px;border-radius:50%;background:#d0d0d0}
+.browser .bar span{margin-left:8px;flex:1;height:16px;border-radius:6px;background:#fff;font-size:10px;line-height:16px;padding:0 8px;color:#777}
+.browser .body{padding:16px;display:grid;gap:8px}
+.sk{height:10px;border-radius:5px;background:#e9e6e1}
+.sk.t{height:22px;width:70%;background:#1b1b1f}
+.sk.b{height:34px;width:46%;border-radius:999px;background:var(--wa)}
+
+/* ---------- Grids ---------- */
+.grid{display:grid;gap:16px;margin-top:34px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.card{border:1px solid var(--line);border-radius:18px;padding:22px;background:rgba(255,255,255,.04);transition:background .25s var(--ease),transform .35s var(--ease)}
+.card:hover{background:rgba(255,255,255,.08);transform:translateY(-3px)}
+.card .n{font-size:12px;color:var(--gold);letter-spacing:.12em}
+.card h4{font-size:21px;letter-spacing:-.02em;margin:10px 0 8px;font-weight:600}
+.card p{color:var(--muted);font-size:15px}
+.ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.1);margin-bottom:14px}
+.ico svg{width:22px;height:22px}
+
+.about{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.quote{font-family:var(--serif);font-size:clamp(28px,3.4vw,46px);line-height:1.1;letter-spacing:-.01em}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tags span{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;color:rgba(255,255,255,.85)}
+
+.steps{counter-reset:s;display:grid;gap:0;margin-top:30px}
+.step{display:grid;grid-template-columns:90px 1fr auto;gap:20px;align-items:baseline;padding:22px 0;border-top:1px solid var(--line)}
+.step:last-child{border-bottom:1px solid var(--line)}
+.step .k{font-size:44px;font-weight:700;letter-spacing:-.04em;color:var(--gold)}
+.step h4{font-size:22px;font-weight:600;letter-spacing:-.02em}
+.step p{color:var(--muted);margin-top:4px}
+.step .d{font-size:13px;color:var(--muted);white-space:nowrap}
+
+.work{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:rgba(255,255,255,.04);transition:transform .4s var(--ease)}
+.work:hover{transform:translateY(-4px)}
+.work .shot{aspect-ratio:16/10;padding:18px;display:flex;align-items:flex-end;position:relative;overflow:hidden}
+.work .shot .ui{width:78%;transform:translateY(14%) rotate(-2deg);transition:transform .5s var(--ease)}
+.work:hover .shot .ui{transform:translateY(6%) rotate(0)}
+.work .info{padding:16px 18px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.work .info b{font-weight:600}
+.work .info span{font-size:13px;color:var(--muted)}
+.badge{font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:4px 9px;color:var(--muted);white-space:nowrap}
+
+.promise{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:34px}
+.promise div{border-left:1px solid var(--line);padding:6px 0 6px 18px}
+.promise b{display:block;font-size:clamp(34px,4vw,56px);letter-spacing:-.045em;font-weight:700;line-height:1}
+.promise span{color:var(--muted);font-size:15px}
+
+.price{display:flex;flex-direction:column;gap:14px}
+.price.hot{background:rgba(255,255,255,.94);color:var(--ink);border-color:transparent}
+.price.hot p,.price.hot li{color:#3b3b40}
+.price .amt{font-size:34px;font-weight:700;letter-spacing:-.035em}
+.price .amt small{font-size:14px;font-weight:500;opacity:.6;letter-spacing:0}
+.price ul{list-style:none;display:grid;gap:8px;font-size:15px;color:var(--muted);flex:1}
+.price li::before{content:"✦";color:var(--gold);margin-right:8px}
+.price.hot li::before{color:var(--wa-dark)}
+.price .pill{justify-content:center;margin-top:6px}
+.price:not(.hot) .pill{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)}
+.ribbon{align-self:flex-start;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--wa);color:#04210f;border-radius:999px;padding:4px 10px}
+
+.faq details{border-top:1px solid var(--line);padding:18px 0}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;font-size:19px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:20px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-weight:400;transition:transform .25s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{color:var(--muted);margin-top:10px;max-width:70ch}
+
+/* ---------- WhatsApp center ---------- */
+.wa-center{text-align:center;display:flex;flex-direction:column;align-items:center;padding-left:28px}
+.wa-orb{position:relative;width:min(300px,62vw);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#5cf195,var(--wa) 45%,var(--wa-dark));color:#fff;box-shadow:0 0 0 1px rgba(255,255,255,.2) inset,0 40px 120px -20px rgba(37,211,102,.7);transition:transform .4s var(--ease);margin:10px auto 0}
+.wa-orb:hover{transform:scale(1.04)}
+.wa-orb:active{transform:scale(.98)}
+.wa-orb svg{width:38%;height:38%}
+.wa-orb::before,.wa-orb::after{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid rgba(37,211,102,.6);animation:ripple 3.2s var(--ease-premium) infinite}
+.wa-orb::after{animation-delay:1.6s}
+@keyframes ripple{from{transform:scale(1);opacity:.9}to{transform:scale(1.6);opacity:0}}
+.wa-number{font-size:clamp(26px,4vw,44px);font-weight:700;letter-spacing:-.03em;margin-top:28px}
+.form{width:100%;max-width:620px;margin-top:34px;text-align:left;display:grid;gap:12px}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form label{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;display:grid;gap:6px}
+.form input,.form select,.form textarea{font:inherit;font-size:16px;color:#fff;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:12px;padding:12px 14px;outline:none;transition:border-color .2s var(--ease),background .2s var(--ease);text-transform:none;letter-spacing:0}
+.form select option{color:#111}
+.form input:focus,.form select:focus,.form textarea:focus{border-color:var(--wa);background:rgba(255,255,255,.1)}
+.form textarea{min-height:96px;resize:vertical}
+.form .pill{justify-content:center;padding:15px 20px;font-size:16px}
+
+.fab{position:fixed;right:22px;bottom:22px;z-index:60;width:62px;height:62px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 14px 40px -8px rgba(37,211,102,.75);transition:transform .2s var(--ease)}
+.fab:hover{transform:scale(1.07)}
+.fab svg{width:30px;height:30px;color:#fff}
+.fab::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--wa);animation:ripple 2.6s var(--ease-premium) infinite}
+.fab .tip{position:absolute;right:74px;white-space:nowrap;background:#fff;color:var(--ink);font-size:13px;font-weight:600;padding:8px 12px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;transform:translateX(8px);transition:opacity .3s var(--ease),transform .3s var(--ease);pointer-events:none}
+.fab.show-tip .tip,.fab:hover .tip{opacity:1;transform:none}
+
+footer{position:relative;z-index:3;padding:40px 28px 110px 200px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--muted);border-top:1px solid var(--line);background:var(--ink)}
+footer a{text-decoration:underline;text-underline-offset:3px}
+
+.progress{position:fixed;top:0;left:0;height:2px;background:var(--wa);z-index:70;width:calc(var(--sp,0) * 100%)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1100px){
+  .g4{grid-template-columns:repeat(2,1fr)}
+  .promise{grid-template-columns:repeat(2,1fr);row-gap:28px}
+}
+@media (max-width:900px){
+  .nav,.rail{display:none}
+  .cover,.content{padding-left:16px;padding-right:16px}
+  footer{padding-left:16px;padding-right:16px}
+  .topbar{padding:14px 16px}
+  .about,.g3,.g2{grid-template-columns:1fr}
+  .float.hide-m{display:none}
+  .browser{width:250px}
+  .chat{width:220px}
+  .step{grid-template-columns:56px 1fr}
+  .step .k{font-size:30px}
+  .step .d{grid-column:2}
+}
+@media (max-width:560px){
+  .g4{grid-template-columns:1fr}
+  .form .row{grid-template-columns:1fr}
+  .pill.top-cta span{display:none}
+  .mega{letter-spacing:-.05em}
+  .fab{right:16px;bottom:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .bg,.float{transform:none!important}
+  .rv,.mega .w>span{transition:none;opacity:1;transform:none}
+  .wa-orb::before,.wa-orb::after,.fab::after{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+
+<!-- ================= TOP BAR ================= -->
+<header class="topbar">
+  <a href="#hero" class="brand"><b data-name>Nama Kamu</b><span>Desainer Web</span><br><span>Edisi Renaisans '26</span></a>
+  <nav class="nav" aria-label="Navigasi utama">
+    <a href="#tentang">Tentang</a>
+    <a href="#layanan">Layanan</a>
+    <a href="#karya">Karya</a>
+    <a href="#paket">Paket</a>
+    <a href="#whatsapp">Kontak</a>
+  </nav>
+  <a class="pill wa top-cta" data-wa="Halo! Saya lihat portofolio kamu dan tertarik bikin website." target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg><span>Chat WhatsApp</span>
+  </a>
+</header>
+
+<!-- ================= CHAPTER INDEX ================= -->
+<ol class="rail" aria-label="Daftar bab">
+  <li><a href="#hero"><i></i>Pembuka</a></li>
+  <li><a href="#tentang"><i></i>Tentang</a></li>
+  <li><a href="#layanan"><i></i>Layanan</a></li>
+  <li><a href="#proses"><i></i>Proses</a></li>
+  <li><a href="#karya"><i></i>Karya</a></li>
+  <li><a href="#alasan"><i></i>Alasan</a></li>
+  <li><a href="#paket"><i></i>Paket</a></li>
+  <li><a href="#whatsapp"><i></i>WhatsApp</a></li>
+</ol>
+
+<main>
+
+<!-- ================= 00 HERO — Botticelli, The Birth of Venus ================= -->
+<section class="chapter" id="hero" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/Sandro_Botticelli_-_La_nascita_di_Venere_-_Google_Art_Project_-_edited.jpg?width=2400');--grad:linear-gradient(170deg,#9cc3c9,#5d8f8a 45%,#2e4a45);--pos:50% 40%">
+  <div class="stage">
+    <div class="bg"></div>
+    <div class="float hide-m" style="top:18%;right:6%;--speed:260;--rot:3deg">
+      <div class="ui chat">
+        <div class="who"><span class="av"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg></span>Calon Klien</div>
+        <div class="bubble">Halo kak, saya mau bikin website buat usaha saya 👋</div>
+        <div class="bubble me">Siap! Ceritakan bisnismu, konsultasinya gratis ✨</div>
+        <div class="meta">dibalas &lt; 1 jam ✓✓</div>
+      </div>
+    </div>
+    <div class="float hide-m" style="top:64%;right:8%;--speed:420;--rot:-4deg">
+      <div class="ui score"><div class="ring"><b>98</b></div><div><b>Performa</b><small>Target skor kecepatan setiap proyek</small></div></div>
+    </div>
+  </div>
+  <div class="cover">
+    <p class="kicker rv">Portofolio · Desainer Web Freelance</p>
+    <h1 class="mega hero-t split">Website yang bikin betah scroll.</h1>
+    <p class="lede rv" style="--i:2">Saya <b data-name>Nama Kamu</b> — desainer web yang mengubah bisnismu menjadi karya seni digital: <em>cantik dipandang</em>, cepat dibuka, dan yang terpenting — <b>mendatangkan pelanggan</b>.</p>
+    <div class="rv" style="--i:3;display:flex;gap:10px;flex-wrap:wrap;margin-top:28px">
+      <a class="pill wa" data-wa="Halo! Saya mau konsultasi gratis soal pembuatan website." target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg>Konsultasi Gratis via WhatsApp</a>
+      <a class="pill" href="#karya" style="background:rgba(255,255,255,.14);color:#fff;border:1px solid var(--line)">Lihat karya ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 01 TENTANG — Vermeer, The Art of Painting ================= -->
+<section class="chapter" id="tentang" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/Jan_Vermeer_-_The_Art_of_Painting_-_Google_Art_Project.jpg?width=2400');--grad:linear-gradient(160deg,#6b5a3e,#2a2218);--pos:50% 30%">
+  <div class="stage">
+    <div class="bg"></div>
+    <div class="float hide-m" style="top:16%;right:8%;--speed:300;--rot:-3deg">
+      <div class="ui browser"><div class="bar"><i></i><i></i><i></i><span>bisnismu.com</span></div><div class="body"><div class="sk t"></div><div class="sk"></div><div class="sk" style="width:80%"></div><div class="sk b"></div></div></div>
+    </div>
+  </div>
+  <div class="cover">
+    <p class="kicker rv">Bab 01</p>
+    <h2 class="mega split">Tentang</h2>
+    <p class="lede rv" style="--i:2">Seperti pelukis di studionya, saya menggarap setiap website dengan detail — bukan template asal jadi.</p>
+  </div>
+  <div class="content">
+    <div class="panel about rv">
+      <div>
+        <p class="quote">“Desain yang baik itu tak terlihat. Yang terasa hanyalah: <em>saya ingin terus scroll</em> — lalu menekan tombol beli.”</p>
+        <div class="tags">
+          <span>UI/UX Design</span><span>Landing Page</span><span>Company Profile</span><span>Toko Online</span><span>Figma</span><span>Webflow / WordPress</span><span>HTML · CSS · JS</span><span>SEO dasar</span>
+        </div>
+      </div>
+      <div>
+        <h3 class="h" style="font-size:clamp(24px,2.4vw,34px)">Halo, saya <span data-name>Nama Kamu</span>.</h3>
+        <p class="sub">Saya desainer web yang membantu UMKM, brand lokal, dan profesional tampil meyakinkan di internet. Fokus saya sederhana: website yang <b>membangun kepercayaan</b> dalam 3 detik pertama dan <b>mengarahkan pengunjung untuk menghubungimu</b>.</p>
+        <p class="sub">Setiap proyek saya tangani langsung — dari riset, desain, sampai website online. Kamu cukup bicara dengan satu orang, lewat satu chat WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 02 LAYANAN — Raphael, The School of Athens ================= -->
+<section class="chapter" id="layanan" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg?width=2400');--grad:linear-gradient(170deg,#c9b48f,#7d6a4f 50%,#3a3125)">
+  <div class="stage"><div class="bg"></div></div>
+  <div class="cover">
+    <p class="kicker rv">Bab 02</p>
+    <h2 class="mega split">Layanan</h2>
+    <p class="lede rv" style="--i:2">Satu desainer, semua yang bisnismu butuhkan untuk tampil online.</p>
+  </div>
+  <div class="content">
+    <div class="panel">
+      <h3 class="h rv">Pilih kebutuhanmu — saya urus sisanya.</h3>
+      <div class="grid g4">
+        <div class="card rv" style="--i:1"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5h16v14H4z"/><path d="M4 9h16M8 13h5M8 16h8"/></svg></div><span class="n">01</span><h4>Landing Page</h4><p>Satu halaman yang fokus menjual. Cocok untuk promo produk, jasa, atau event — langsung terhubung ke WhatsApp.</p></div>
+        <div class="card rv" style="--i:2"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></div><span class="n">02</span><h4>Company Profile</h4><p>Website multi-halaman yang membuat bisnismu terlihat profesional dan terpercaya di mata klien.</p></div>
+        <div class="card rv" style="--i:3"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6h15l-2 9H8L6 3H3"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg></div><span class="n">03</span><h4>Toko Online</h4><p>Katalog produk yang cantik dengan alur pesan yang mudah — via checkout atau langsung ke chat.</p></div>
+        <div class="card rv" style="--i:4"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></div><span class="n">04</span><h4>Redesain Website</h4><p>Website lama terasa ketinggalan zaman? Saya perbarui tampilan, kecepatan, dan alurnya.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03 PROSES — Michelangelo, The Creation of Adam ================= -->
+<section class="chapter" id="proses" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/Michelangelo_-_Creation_of_Adam_(cropped).jpg?width=2400');--grad:linear-gradient(160deg,#cdbb9c,#8a7457 55%,#3b3022)">
+  <div class="stage">
+    <div class="bg"></div>
+    <div class="float hide-m" style="top:14%;left:42%;--speed:340;--rot:2deg">
+      <div class="ui dark chat"><div class="who">✦ Progres proyek</div><div class="sk" style="margin-top:12px;background:rgba(255,255,255,.15)"><div style="width:72%;height:100%;border-radius:5px;background:var(--wa)"></div></div><div class="meta" style="text-align:left">Desain disetujui · 72%</div></div>
+    </div>
+  </div>
+  <div class="cover">
+    <p class="kicker rv">Bab 03</p>
+    <h2 class="mega split">Proses</h2>
+    <p class="lede rv" style="--i:2">Dari sentuhan pertama ide sampai website hidup — jelas, transparan, tanpa drama.</p>
+  </div>
+  <div class="content">
+    <div class="panel">
+      <h3 class="h rv">Empat langkah. Kamu selalu tahu progresnya.</h3>
+      <div class="steps">
+        <div class="step rv"><span class="k">01</span><div><h4>Ngobrol di WhatsApp</h4><p>Ceritakan bisnis, target pelanggan, dan website impianmu. Gratis, tanpa komitmen.</p></div><span class="d">Hari 1</span></div>
+        <div class="step rv"><span class="k">02</span><div><h4>Riset &amp; Desain</h4><p>Saya pelajari kompetitor dan buat desain visual yang bisa kamu lihat dan komentari sebelum dibangun.</p></div><span class="d">Hari 2–5</span></div>
+        <div class="step rv"><span class="k">03</span><div><h4>Pembangunan</h4><p>Desain diubah jadi website responsif, cepat, dan rapi di HP maupun laptop.</p></div><span class="d">Hari 6–10</span></div>
+        <div class="step rv"><span class="k">04</span><div><h4>Online &amp; Pendampingan</h4><p>Website dipasang di domainmu, plus panduan singkat dan dukungan setelah rilis.</p></div><span class="d">Hari 11–14</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 04 KARYA — Botticelli, Primavera ================= -->
+<section class="chapter" id="karya" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/Botticelli-primavera.jpg?width=2400');--grad:linear-gradient(170deg,#3d4a32,#1c2318)">
+  <div class="stage"><div class="bg"></div></div>
+  <div class="cover">
+    <p class="kicker rv">Bab 04</p>
+    <h2 class="mega split">Karya</h2>
+    <p class="lede rv" style="--i:2">Beberapa konsep desain yang menunjukkan cara saya berpikir. Bisnismu bisa jadi yang berikutnya.</p>
+  </div>
+  <div class="content">
+    <div class="panel">
+      <h3 class="h rv">Setiap brand punya cerita. Saya membuatnya terlihat.</h3>
+      <div class="grid g2">
+        <!-- Ganti setiap kartu dengan proyek nyata kamu (screenshot + link). -->
+        <a class="work rv" style="--i:1" href="#whatsapp">
+          <div class="shot" style="background:linear-gradient(135deg,#c98a5b,#6b3a24)"><div class="ui browser"><div class="bar"><i></i><i></i><i></i><span>kopisenja.id</span></div><div class="body"><div class="sk t" style="background:#5a2f1c"></div><div class="sk"></div><div class="sk b" style="background:#c98a5b"></div></div></div></div>
+          <div class="info"><div><b>Kopi Senja</b><br><span>Landing page kafe & menu online</span></div><span class="badge">Konsep</span></div>
+        </a>
+        <a class="work rv" style="--i:2" href="#whatsapp">
+          <div class="shot" style="background:linear-gradient(135deg,#3557a8,#121d3d)"><div class="ui browser"><div class="bar"><i></i><i></i><i></i><span>batiklaras.com</span></div><div class="body"><div class="sk t" style="background:#24396f"></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px"><div class="sk" style="height:42px"></div><div class="sk" style="height:42px"></div><div class="sk" style="height:42px"></div></div><div class="sk b" style="background:#3557a8"></div></div></div></div>
+          <div class="info"><div><b>Batik Laras</b><br><span>Toko online fesyen lokal</span></div><span class="badge">Konsep</span></div>
+        </a>
+        <a class="work rv" style="--i:3" href="#whatsapp">
+          <div class="shot" style="background:linear-gradient(135deg,#5fb6a8,#1d4d47)"><div class="ui browser"><div class="bar"><i></i><i></i><i></i><span>kliniksehat.co.id</span></div><div class="body"><div class="sk t" style="background:#1d4d47"></div><div class="sk"></div><div class="sk" style="width:60%"></div><div class="sk b" style="background:#5fb6a8"></div></div></div></div>
+          <div class="info"><div><b>Klinik Sehat</b><br><span>Company profile & booking jadwal</span></div><span class="badge">Konsep</span></div>
+        </a>
+        <a class="work rv" style="--i:4" href="#whatsapp">
+          <div class="shot" style="background:linear-gradient(135deg,#b45a7c,#3e1a2a)"><div class="ui browser"><div class="bar"><i></i><i></i><i></i><span>studiorasa.id</span></div><div class="body"><div class="sk t" style="background:#3e1a2a"></div><div class="sk" style="height:60px"></div><div class="sk b" style="background:#b45a7c"></div></div></div></div>
+          <div class="info"><div><b>Studio Rasa</b><br><span>Portofolio fotografer & wedding</span></div><span class="badge">Konsep</span></div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 ALASAN — Friedrich, Wanderer above the Sea of Fog ================= -->
+<section class="chapter" id="alasan" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/Caspar_David_Friedrich_-_Wanderer_above_the_sea_of_fog.jpeg?width=2400');--grad:linear-gradient(180deg,#8a97a6,#3a4450 60%,#1a1f25);--pos:50% 25%">
+  <div class="stage"><div class="bg"></div></div>
+  <div class="cover">
+    <p class="kicker rv">Bab 05</p>
+    <h2 class="mega split">Alasan</h2>
+    <p class="lede rv" style="--i:2">Kenapa memilih saya? Karena website-mu harus berdiri di atas kompetitor — bukan tenggelam di antara mereka.</p>
+  </div>
+  <div class="content">
+    <div class="panel">
+      <h3 class="h rv">Bukan sekadar cantik. Website yang <em>bekerja</em> untukmu.</h3>
+      <div class="promise">
+        <div class="rv" style="--i:1"><b>&lt;1 jam</b><span>Waktu balas chat di jam kerja</span></div>
+        <div class="rv" style="--i:2"><b>14 hari</b><span>Rata-rata target website online</span></div>
+        <div class="rv" style="--i:3"><b>100%</b><span>Responsif di HP, tablet &amp; laptop</span></div>
+        <div class="rv" style="--i:4"><b>Gratis</b><span>Konsultasi &amp; estimasi biaya</span></div>
+      </div>
+      <div class="grid g3" style="margin-top:40px">
+        <div class="card rv"><h4>Desain yang menjual</h4><p>Tata letak, warna, dan kata-kata disusun untuk satu tujuan: membuat pengunjung menghubungimu.</p></div>
+        <div class="card rv" style="--i:1"><h4>Cepat &amp; ramah SEO</h4><p>Website ringan yang mudah ditemukan di Google — karena pelanggan tidak suka menunggu.</p></div>
+        <div class="card rv" style="--i:2"><h4>Langsung ke WhatsApp</h4><p>Setiap halaman punya jalan pintas ke chat. Calon pembeli tinggal satu klik untuk order.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 06 PAKET — Van Eyck, Arnolfini Portrait ================= -->
+<section class="chapter" id="paket" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/Van_Eyck_-_Arnolfini_Portrait.jpg?width=2400');--grad:linear-gradient(160deg,#3f4a2c,#1b1f14);--pos:50% 35%">
+  <div class="stage"><div class="bg"></div></div>
+  <div class="cover">
+    <p class="kicker rv">Bab 06</p>
+    <h2 class="mega split">Paket</h2>
+    <p class="lede rv" style="--i:2">Investasi yang jelas sejak awal. Tanpa biaya tersembunyi.</p>
+  </div>
+  <div class="content">
+    <div class="panel">
+      <h3 class="h rv">Pilih paket, atau minta penawaran khusus.</h3>
+      <!-- Sesuaikan harga & isi paket dengan tarif kamu. -->
+      <div class="grid g3">
+        <div class="card price rv" style="--i:1">
+          <h4>Starter</h4><p>Untuk usaha yang baru mulai online.</p>
+          <div class="amt">Rp1,5jt<small> mulai</small></div>
+          <ul><li>1 halaman landing page</li><li>Desain responsif</li><li>Tombol WhatsApp & Maps</li><li>2× revisi</li></ul>
+          <a class="pill" data-wa="Halo! Saya tertarik dengan Paket Starter. Bisa dijelaskan lebih lanjut?" target="_blank" rel="noopener">Tanya paket ini</a>
+        </div>
+        <div class="card price hot rv" style="--i:2">
+          <span class="ribbon">Paling diminati</span>
+          <h4>Bisnis</h4><p>Website profesional untuk membangun kepercayaan.</p>
+          <div class="amt">Rp3,5jt<small> mulai</small></div>
+          <ul><li>Hingga 5 halaman</li><li>Copywriting yang menjual</li><li>SEO dasar & Google Analytics</li><li>Domain + hosting 1 tahun</li><li>Revisi sampai puas</li></ul>
+          <a class="pill wa" data-wa="Halo! Saya tertarik dengan Paket Bisnis. Bisa dijelaskan lebih lanjut?" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg>Ambil paket ini</a>
+        </div>
+        <div class="card price rv" style="--i:3">
+          <h4>Premium</h4><p>Toko online atau website dengan fitur khusus.</p>
+          <div class="amt">Rp7jt<small> mulai</small></div>
+          <ul><li>Halaman tanpa batas</li><li>Katalog / toko online</li><li>Animasi & interaksi custom</li><li>Pendampingan 3 bulan</li></ul>
+          <a class="pill" data-wa="Halo! Saya tertarik dengan Paket Premium. Bisa dijelaskan lebih lanjut?" target="_blank" rel="noopener">Tanya paket ini</a>
+        </div>
+      </div>
+      <div class="faq" style="margin-top:44px">
+        <details class="rv"><summary>Saya belum punya konten atau logo, bisa?</summary><p>Bisa. Saya bantu susun kata-kata (copywriting) dan arahan visual. Kamu cukup ceritakan bisnismu.</p></details>
+        <details class="rv"><summary>Bagaimana sistem pembayarannya?</summary><p>Umumnya DP 50% untuk mulai, dan pelunasan setelah website siap dan kamu puas dengan hasilnya.</p></details>
+        <details class="rv"><summary>Apakah website bisa saya ubah sendiri nanti?</summary><p>Bisa. Saya sediakan panduan singkat, dan untuk paket tertentu website dibuat dengan panel yang mudah diedit.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 07 WHATSAPP — Van Gogh, The Starry Night (pusat website) ================= -->
+<section class="chapter" id="whatsapp" style="--img:url('https://commons.wikimedia.org/wiki/Special:FilePath/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg?width=2400');--grad:radial-gradient(circle at 70% 20%,#3c5aa6,#0f1a3d 60%,#060a18)">
+  <div class="stage">
+    <div class="bg"></div>
+    <div class="float hide-m" style="top:58%;left:7%;--speed:280;--rot:-5deg">
+      <div class="ui chat"><div class="who"><span class="av"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg></span><span data-name>Nama Kamu</span></div><div class="bubble">Hai! Ada yang bisa saya bantu untuk website-mu? 😊</div><div class="meta">online</div></div>
+    </div>
+  </div>
+  <div class="cover wa-center" style="justify-content:center;padding-bottom:6vh;padding-top:14vh">
+    <p class="kicker rv">Bab 07 · Pusat semuanya</p>
+    <h2 class="mega split" style="font-size:clamp(56px,12vw,200px)">Ayo ngobrol.</h2>
+    <p class="lede rv" style="--i:2;margin-left:auto;margin-right:auto">Website impianmu dimulai dari satu pesan. Klik tombol hijau di bawah — konsultasi gratis, tanpa komitmen.</p>
+    <a class="wa-orb rv" style="--i:3" data-wa="Halo! Saya mau konsultasi gratis soal pembuatan website." target="_blank" rel="noopener" aria-label="Chat WhatsApp sekarang">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg>
+    </a>
+    <p class="wa-number rv" style="--i:4" data-wa-display>+62 812-3456-7890</p>
+    <p class="sub rv" style="--i:5;margin:6px auto 0">Slot proyek terbatas setiap bulan agar setiap klien mendapat perhatian penuh.</p>
+
+    <form class="form panel rv" id="waForm" style="--i:6">
+      <div class="row">
+        <label>Nama kamu<input name="nama" required placeholder="mis. Budi"></label>
+        <label>Nama bisnis<input name="bisnis" placeholder="mis. Kopi Senja"></label>
+      </div>
+      <div class="row">
+        <label>Kebutuhan
+          <select name="layanan">
+            <option>Landing Page</option><option>Company Profile</option><option>Toko Online</option><option>Redesain Website</option><option>Belum tahu, mau konsultasi</option>
+          </select>
+        </label>
+        <label>Perkiraan budget
+          <select name="budget">
+            <option>Belum ditentukan</option><option>&lt; Rp2 juta</option><option>Rp2–5 juta</option><option>Rp5–10 juta</option><option>&gt; Rp10 juta</option>
+          </select>
+        </label>
+      </div>
+      <label>Ceritakan singkat<textarea name="pesan" placeholder="Saya ingin website yang…"></textarea></label>
+      <button class="pill wa" type="submit"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#i-wa"/></svg>Kirim lewat WhatsApp</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <span>© <span id="yr"></span> <span data-name>Nama Kamu</span> · Desainer Web</span>
+  <span>Lukisan: Botticelli, Vermeer, Raphael, Michelangelo, Friedrich, van Eyck, van Gogh — domain publik via <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a></span>
+</footer>
+
+<!-- Floating WhatsApp button -->
+<a class="fab" data-wa="Halo! Saya tertarik bikin website." target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+  <span class="tip">Konsultasi gratis 👋</span>
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="#i-wa"/></svg>
+</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35zM12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.31l-.34-.2-3.57.93.95-3.48-.22-.36a9.43 9.43 0 0 1-1.45-5.03c0-5.2 4.24-9.44 9.45-9.44 2.52 0 4.89.99 6.67 2.77a9.37 9.37 0 0 1 2.76 6.68c0 5.21-4.24 9.44-9.44 9.44zm8.04-17.48A11.3 11.3 0 0 0 12.05.7C5.78.7.68 5.8.68 12.06c0 2 .52 3.96 1.52 5.68L.58 23.7l6.1-1.6a11.3 11.3 0 0 0 5.36 1.37h.01c6.27 0 11.37-5.1 11.37-11.37 0-3.04-1.18-5.89-3.33-8.04z"/></symbol>
+</svg>
+
+<script>
+/* =========================================================
+   UBAH DI SINI — data diri & nomor WhatsApp
+   whatsapp: format internasional tanpa "+", spasi, atau "0" di depan
+   ========================================================= */
+const CONFIG = {
+  name: "Nama Kamu",
+  whatsapp: "6281234567890",
+};
+
+(() => {
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const waLink = (msg) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+
+  // Fill name + WhatsApp links
+  $$("[data-name]").forEach(el => el.textContent = CONFIG.name);
+  $$("[data-wa]").forEach(el => el.href = waLink(el.dataset.wa));
+  const n = CONFIG.whatsapp;
+  $$("[data-wa-display]").forEach(el => el.textContent = `+${n.slice(0, 2)} ${n.slice(2, 5)}-${n.slice(5, 9)}-${n.slice(9)}`);
+  document.getElementById("yr").textContent = new Date().getFullYear();
+  document.title = `${CONFIG.name} — Desainer Web`;
+
+  // Form → prefilled WhatsApp message
+  document.getElementById("waForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const msg = [
+      `Halo ${CONFIG.name}! Saya ${f.get("nama")}${f.get("bisnis") ? ` dari ${f.get("bisnis")}` : ""}.`,
+      `Kebutuhan: ${f.get("layanan")}`,
+      `Budget: ${f.get("budget")}`,
+      f.get("pesan") ? `Cerita singkat: ${f.get("pesan")}` : "",
+    ].filter(Boolean).join("\n");
+    window.open(waLink(msg), "_blank", "noopener");
+  });
+
+  // Split big titles into words for staggered reveal
+  $$(".split").forEach(h => {
+    const words = h.textContent.trim().split(/\s+/);
+    h.innerHTML = words.map((w, i) => `<span class="w"><span style="transition-delay:${i * 90}ms">${w}</span></span>`).join(" ");
+  });
+
+  // Reveal on view
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+  }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+  $$(".rv, .split").forEach(el => io.observe(el));
+
+  // Active chapter in the rail
+  const railLinks = $$(".rail a");
+  const chapters = $$(".chapter");
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (!en.isIntersecting) return;
+      railLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === `#${en.target.id}`));
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  chapters.forEach(c => spy.observe(c));
+
+  // Scroll-driven parallax: each chapter exposes --p (0 → 1) as it passes through the viewport
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const root = document.documentElement;
+  const topbar = document.querySelector(".topbar");
+  let ticking = false;
+  const update = () => {
+    const vh = innerHeight;
+    if (!reduce) {
+      chapters.forEach(c => {
+        const r = c.getBoundingClientRect();
+        if (r.bottom < -vh || r.top > vh * 2) return;
+        const p = Math.min(1, Math.max(0, (vh - r.top) / (r.height + vh)));
+        c.style.setProperty("--p", p.toFixed(4));
+      });
+    }
+    const max = root.scrollHeight - vh;
+    root.style.setProperty("--sp", max > 0 ? (scrollY / max).toFixed(4) : 0);
+    topbar.classList.toggle("scrolled", scrollY > vh * 0.6);
+    ticking = false;
+  };
+  addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  addEventListener("resize", update);
+  update();
+
+  // Hero title plays immediately on load
+  requestAnimationFrame(() => $$("#hero .split, #hero .rv").forEach(el => el.classList.add("in")));
+
+  // Nudge the floating WhatsApp tooltip once after a few seconds
+  const fab = document.querySelector(".fab");
+  setTimeout(() => { fab.classList.add("show-tip"); setTimeout(() => fab.classList.remove("show-tip"), 4000); }, 6000);
+})();
+</script>
+</body>
+</html>
